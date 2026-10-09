@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bukie Digital Solutions</title>
+    <meta name="description" content="Software, apps and AI tools built in Nigeria for real users. Based in Abuja, Nigeria." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="site-hero.css" />
+    <link rel="icon" type="image/png" href="bds-logo-final.png" />
+    <style>
+      /* Brand colors from the logo, with calm tints that follow the theme */
+      :root {
+        --x-navy: #1B2A5E;
+        --x-green: #1F6B45;
+        --x-green-tint: light-dark(#E8F3EC, #17271e);
+        --x-navy-tint: light-dark(#E9EDF7, #1a2136);
+        --x-green-ink: light-dark(#1F6B45, #7cc79f);
+        --x-navy-ink: light-dark(#1B2A5E, #b4c0ea);
+      }
+
+      /* Brand mark in the top bar, the footer and the founder card */
+      .page > .x-brand { display: none; }
+      .x-brand { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 0 10px 0 2px; min-height: 36px; color: var(--text-primary-on); text-decoration: none; font: var(--type-label); white-space: nowrap; }
+      .x-logo-chip { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #fff; }
+      .x-logo-chip img { width: 24px; height: 24px; object-fit: contain; }
+      .x-brand:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: var(--r-pill); }
+      header.nav .x-brand { color: #fff; border-radius: var(--r-pill); }
+      @media (max-width: 760px) { .x-brand__name { display: none; } header.nav .x-brand { padding: 0; min-height: var(--tap); min-width: var(--tap); justify-content: center; } }
+      .x-foot-brand { display: inline-flex; align-items: center; gap: 10px; }
+      .x-foot-brand .x-logo-chip { width: 28px; height: 28px; box-shadow: 0 0 0 1px var(--stroke-secondary); }
+      .x-foot-brand .x-logo-chip img { width: 20px; height: 20px; }
+
+      /* 3D glass (bevel + frosted body), used only on the top bar, its active pill, buttons and the hero callout */
+      :root {
+        --bevel-md: inset 2px 2px 1px -3px hsl(0 0% 100% / .8), inset 2px 2px 1px -3px hsl(0 0% 100% / .5), inset 1px 1px 1px -.5px hsl(0 0% 100% / .15), inset 1px 1px .25px hsl(0 0% 100% / .03), inset 0 0 .25px .5px hsl(0 0% 100% / .03), inset 0 1px 0 hsl(0 0% 100% / .14), inset 0 -1px 0 hsl(225 50% 8% / .14);
+        --bevel-sm: inset 1px 1px 1px -2px hsl(0 0% 100% / .8), inset 1px 1px .5px -1.5px hsl(0 0% 100% / .5), inset .5px .5px .5px -.25px hsl(0 0% 100% / .15), inset 0 1px 0 hsl(0 0% 100% / .16), inset 0 -1px 0 hsl(225 50% 8% / .12);
+        --x-glass-blur: blur(24px) saturate(1.6) brightness(1.05);
+        --x-glass-shadow: 0 6px 20px -8px rgba(15, 25, 60, .35);
+        --x-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        --x-spring: cubic-bezier(.34, 1.56, .64, 1);
+        --x-slide: cubic-bezier(.22, .61, .36, 1);
+      }
+      .x-glass {
+        --x-fill: hsl(0 0% 100% / .18);
+        --x-fill-hover: hsl(0 0% 100% / .24);
+        --x-bevel: var(--bevel-md);
+        isolation: isolate;
+        background: transparent;
+        border-color: transparent;
+        box-shadow: var(--x-glass-shadow);
+        transition: transform 120ms var(--x-spring), box-shadow var(--dur-quick) ease;
+      }
+      .x-glass:not(.nav) { position: relative; }
+      .x-glass::before, .x-glass::after, .btn.x-glass[target]::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        pointer-events: none;
+      }
+      .x-glass::before {
+        background-color: var(--x-fill);
+        background-image: var(--x-noise);
+        -webkit-backdrop-filter: var(--x-glass-blur);
+        backdrop-filter: var(--x-glass-blur);
+        transition: background-color 200ms ease;
+      }
+      .x-glass::after, .btn.x-glass[target]::after { box-shadow: var(--x-bevel); font-size: 0; }
+      .x-glass > * { position: relative; z-index: 1; }
+      a.x-glass:hover, button.x-glass:hover { --x-fill: var(--x-fill-hover); box-shadow: var(--x-glass-shadow); }
+      a.x-glass:active, button.x-glass:active { transform: scale(.97); }
+
+      /* Glass buttons: pill shape, tinted fills */
+      .btn.x-glass { min-height: var(--tap); padding: 0 18px; border-radius: var(--r-pill); font: var(--type-label); }
+      .x-btn--primary { --x-fill: hsl(225 55% 24% / .72); --x-fill-hover: hsl(225 55% 28% / .78); --x-solid: hsl(225 55% 24%); color: #fff; }
+      .x-btn--wa { --x-fill: hsl(150 55% 27% / .9); --x-fill-hover: hsl(150 55% 28% / .94); --x-solid: hsl(150 55% 24%); color: #fff; }
+      .hero .x-btn--wa { --x-fill: hsl(150 55% 27% / .72); --x-fill-hover: hsl(150 55% 29% / .8); }
+      .x-btn--soft { --x-fill: light-dark(hsl(225 40% 20% / .06), hsl(0 0% 100% / .08)); --x-fill-hover: light-dark(hsl(225 40% 20% / .1), hsl(0 0% 100% / .13)); --x-solid: var(--x-navy-tint); --x-bevel: var(--bevel-sm); color: var(--x-navy-ink); }
+      .hero .x-btn--soft { --x-fill: hsl(0 0% 100% / .18); --x-fill-hover: hsl(0 0% 100% / .24); --x-solid: hsl(225 30% 22%); color: #fff; }
+      .x-ext { font-size: 12px; }
+      .x-glass:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 3px; }
+      .hero .x-glass:focus-visible, .x-topbar .x-glass:focus-visible { outline-color: #fff; }
+
+      /* Hero callout, when there is one: frosted navy glass, white text */
+      .hero > .callout { background: hsl(225 55% 16% / .55); border: 1px solid hsl(0 0% 100% / .14); color: #fff; box-shadow: var(--bevel-md), var(--x-glass-shadow); -webkit-backdrop-filter: var(--x-glass-blur); backdrop-filter: var(--x-glass-blur); background-image: var(--x-noise); }
+      .hero > .callout .callout__head, .hero > .callout .fineprint { color: hsl(0 0% 100% / .85); }
+
+      /* Sticky top bar: deep navy glass with the sliding section pill */
+      header.nav.x-topbar {
+        --x-fill: hsl(226 50% 12% / .72);
+        --x-solid: hsl(226 50% 12%);
+        background: transparent;
+        border: 1px solid hsl(0 0% 100% / .12);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        box-shadow: var(--x-glass-shadow);
+        color: #fff;
+        gap: 6px;
+      }
+      header.nav.x-topbar.is-solid { --x-fill: hsl(226 50% 12% / .82); }
+      header.nav.x-topbar::before { border-radius: inherit; }
+      .x-topbar :focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+      .x-topbar .theme-btn { width: 40px; height: 40px; color: #fff; background: hsl(0 0% 100% / .1); box-shadow: var(--bevel-sm); }
+      .x-topbar .theme-btn:hover { background: hsl(0 0% 100% / .18); }
+      .x-topbar .seg {
+        --x-fl: 0px;
+        --x-fr: 0px;
+        position: relative;
+        flex: 0 1 auto;
+        min-width: 0;
+        background: hsl(226 42% 20% / .7);
+        scroll-snap-type: x proximity;
+        overscroll-behavior-x: contain;
+        -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--x-fl), #000 calc(100% - var(--x-fr)), transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0, #000 var(--x-fl), #000 calc(100% - var(--x-fr)), transparent 100%);
+      }
+      .x-topbar .seg.x-fl { --x-fl: 22px; }
+      .x-topbar .seg.x-fr { --x-fr: 22px; }
+      .x-topbar .seg a {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        flex: none;
+        min-height: var(--x-pill-h, 40px);
+        padding: 0 14px;
+        white-space: nowrap;
+        scroll-snap-align: center;
+        color: #e6e9f2;
+        transition: color 250ms ease;
+      }
+      .x-topbar .seg a:hover { color: #fff; }
+      .x-topbar .seg a:focus-visible { outline-offset: -3px; }
+      .x-topbar .seg.x-has-ind a[aria-current="true"] { background: transparent; color: var(--x-navy); }
+      .x-topbar .seg.x-has-ind a[aria-current="true"]:focus-visible { outline-color: var(--x-navy); }
+      .x-ind {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        height: var(--x-pill-h, 40px);
+        width: 0;
+        visibility: hidden;
+        border-radius: var(--r-pill);
+        background-color: hsl(0 0% 100% / .88);
+        background-image: var(--x-noise);
+        -webkit-backdrop-filter: var(--x-glass-blur);
+        backdrop-filter: var(--x-glass-blur);
+        box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 hsl(225 40% 20% / .14), inset 1px 1px 1px -.5px hsl(0 0% 100% / .9), 0 2px 8px -2px rgba(0, 0, 0, .35);
+        opacity: 0;
+        pointer-events: none;
+        will-change: transform, width;
+        transition: transform 350ms var(--x-slide), width 350ms var(--x-slide), opacity 200ms ease;
+      }
+      .x-nav-cta.x-glass { --x-fill: hsl(225 55% 32% / .85); --x-fill-hover: hsl(225 55% 36% / .9); --x-bevel: var(--bevel-sm); }
+
+      /* No backdrop-filter: solid tints with the same contrast */
+      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .x-glass::before { background-color: var(--x-solid, hsl(225 30% 22%)); }
+        a.x-glass:hover::before { filter: brightness(1.12); }
+        .x-nav-cta.x-glass::before { background-color: hsl(225 55% 32%); }
+        .x-ind { background-color: #fff; }
+        .hero > .callout { background-color: hsl(225 55% 16% / .92); }
+      }
+
+      /* Hero: typing line and the two buttons */
+      .x-type { font: var(--type-lede); color: var(--hero-text); min-height: 1.5em; }
+      .x-type__word { color: #9fdcbb; }
+      .x-type__cursor { display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -0.15em; background: #9fdcbb; animation: x-blink 1s steps(1) infinite; }
+      .x-type__static { display: none; }
+      @keyframes x-blink { 50% { opacity: 0; } }
+      @media (prefers-reduced-motion: reduce) {
+        .x-type__live { display: none; }
+        .x-type__static { display: inline; }
+      }
+      .hero .links { margin-top: 6px; }
+      @media (pointer: coarse), (max-width: 599px) { .hero .links .btn { min-height: 48px; } .links .btn { min-height: var(--tap); } }
+
+      /* Type: confident headings, comfortable measure */
+      .head h2 { font: var(--weight-medium) clamp(26px, 3.1vw, 38px)/1.18 var(--sans); letter-spacing: -0.015em; max-width: 24ch; text-wrap: balance; }
+      .prose p, .head__sub { max-width: 65ch; }
+      .x-tint { padding: clamp(24px, 4vw, 40px); border: 0; border-radius: var(--r-l); background: var(--x-green-tint); }
+
+      /* Hand-drawn line icons: navy stroke, one green detail each */
+      .x-ico { flex: none; width: 24px; height: 24px; color: var(--x-navy-ink); }
+      .x-ico .g { color: var(--x-green-ink); }
+
+      /* Services: three groups, two columns of plain rows */
+      .x-group + .x-group { margin-top: clamp(28px, 3.6vw, 44px); }
+      .x-group__title { font: var(--type-label); text-transform: uppercase; letter-spacing: 0.08em; color: var(--x-green-ink); margin-bottom: 10px; }
+      .x-svc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(24px, 5vw, 64px); }
+      .x-svc li { display: flex; gap: 14px; padding: 16px 0; border-top: 1px solid var(--stroke-secondary); }
+      .x-svc b { display: block; font: var(--type-body-strong); margin-bottom: 3px; }
+      .x-svc span { display: block; font: var(--type-small); color: var(--text-secondary); max-width: 46ch; }
+      @media (max-width: 760px) { .x-svc { grid-template-columns: minmax(0, 1fr); } }
+
+      /* Founder: round avatar beside the name */
+      .x-id { display: flex; flex-direction: row; align-items: center; gap: clamp(16px, 2.4vw, 24px); margin-bottom: clamp(20px, 2.6vw, 28px); }
+      .x-id > div { min-width: 0; }
+      .x-id__avatar { display: block; flex: 0 0 auto; flex-shrink: 0; align-self: center; width: 112px; height: 112px; max-width: none; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 50%; border: 1px solid var(--stroke-primary); box-shadow: 0 0 0 2px #fff; background: none; }
+      .x-id__name { font: var(--weight-medium) clamp(22px, 2.4vw, 28px)/1.2 var(--sans); letter-spacing: -0.01em; color: var(--x-navy-ink); }
+      .x-id__role { font: var(--type-label); color: var(--x-green-ink); margin-top: 6px; }
+      .x-id__sub { font: var(--type-small); color: var(--text-secondary); margin-top: 4px; }
+      @media (max-width: 599px) { .x-id__avatar { width: 88px; height: 88px; } }
+      @media (max-width: 359px) { .x-id { flex-direction: column; align-items: flex-start; gap: 12px; } .x-id__avatar { align-self: flex-start; } }
+      /* Phones: logo left, scrollable links in the middle, compact CTA and theme toggle right */
+      @media (max-width: 760px) {
+        header.nav.x-topbar { width: 100%; justify-self: stretch; gap: 4px; }
+        header.nav.x-topbar .seg { flex: 1 1 auto; --x-pill-h: var(--tap); }
+        .x-topbar .theme-btn { width: var(--tap); height: var(--tap); }
+      }
+      @media (max-width: 480px) { .x-cta-more { display: none; } }
+
+      /* Skills: grouped lines, thin rules */
+      .x-skills { margin: clamp(20px, 2.6vw, 28px) 0 0; }
+      .x-skills__label { font: var(--type-label); text-transform: uppercase; letter-spacing: 0.08em; color: var(--x-green-ink); margin-bottom: 4px; }
+      .x-skills .row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 4px 20px; padding: 11px 0; border-top: 1px solid var(--stroke-secondary); }
+      .x-skills dl { margin: 0; }
+      .x-skills dt { font: var(--type-small); color: var(--text-secondary); }
+      .x-skills dd { margin: 0; font: var(--type-small); }
+      @media (max-width: 599px) { .x-skills .row { grid-template-columns: minmax(0, 1fr); } }
+
+      /* Closing call to action */
+      .x-cta .links { margin-top: 20px; }
+      .x-cta .head__sub { color: var(--text-primary); }
+      .x-nav-cta {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 0 14px;
+        border-radius: var(--r-pill);
+        color: #fff;
+        font: var(--type-label);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      @media (max-width: 760px) { .x-nav-cta { min-height: var(--tap); padding: 0 12px; } }
+
+      /* Flat surfaces: no lift, no heavy shadow */
+      .x-lift { transition: box-shadow var(--dur-quick) ease; }
+      .x-lift:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-lift:focus-visible, .x-nav-cta:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+      .hero .x-lift:focus-visible { outline-color: #fff; }
+
+      /* Ways to work: two plain columns with a rule above */
+      .x-ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(24px, 5vw, 64px); }
+      .x-ways > div { padding-top: 16px; border-top: 1px solid var(--stroke-primary); }
+      .x-ways h3 { font: var(--type-heading); margin-bottom: 6px; }
+      .x-ways p { font: var(--type-body); color: var(--text-secondary); max-width: 46ch; }
+      @media (max-width: 760px) { .x-ways { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+
+      /* Contact: three lines, hairline rules */
+      .x-contact { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(20px, 4vw, 48px); }
+      .x-contact li { display: grid; gap: 4px; align-content: start; padding-top: 16px; border-top: 1px solid var(--stroke-primary); }
+      .x-contact small { font: var(--type-small); color: var(--text-secondary); }
+      .x-contact a.link { font: var(--type-body-strong); justify-self: start; display: inline-flex; align-items: center; min-height: var(--tap); overflow-wrap: anywhere; }
+      @media (max-width: 760px) { .x-contact { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+
+      /* How we work: four steps joined by a line that draws as they appear */
+      .x-flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .x-flow__step { position: relative; padding: 32px 28px 0 0; }
+      .x-flow__step::before, .x-flow__step::after {
+        content: "";
+        position: absolute;
+        top: 5px; left: 20px; right: 8px;
+        height: 1px;
+        background: var(--stroke-primary);
+      }
+      .x-flow__step::after { background: var(--x-green-ink); transform-origin: left center; }
+      .x-flow__step:last-child::before, .x-flow__step:last-child::after { display: none; }
+      .x-flow__node {
+        position: absolute;
+        top: 0; left: 0;
+        width: 11px; height: 11px;
+        border-radius: 50%;
+        background: var(--x-navy-ink);
+        box-shadow: 0 0 0 4px var(--fill-primary-on), 0 0 0 5px var(--x-green-ink);
+      }
+      .x-flow__num { font: var(--type-numeral); font-variant-numeric: tabular-nums; margin-bottom: 12px; color: var(--x-navy-ink); }
+      .x-flow h3 { font: var(--type-heading); text-wrap: balance; }
+      @media (max-width: 760px) {
+        .x-flow { grid-template-columns: minmax(0, 1fr); }
+        .x-flow__step { padding: 0 0 28px 32px; }
+        .x-flow__step:last-child { padding-bottom: 0; }
+        .x-flow__step::before, .x-flow__step::after { top: 20px; bottom: 4px; left: 5px; right: auto; width: 1px; height: auto; }
+        .x-flow__step::after { transform-origin: center top; }
+        .x-flow__num { font-size: 40px; line-height: 1; margin-bottom: 8px; }
+      }
+
+      /* Calm rhythm: the one-line section sits tight */
+      .x-tight .head { margin-bottom: 0; }
+
+      @media (prefers-reduced-motion: no-preference) {
+        html { scroll-behavior: smooth; }
+
+        /* Hero: one soft fade for the copy, then the buttons */
+        @keyframes x-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+        .hero__copy { animation: x-rise 600ms cubic-bezier(0.25, 0.1, 0.25, 1) both; }
+
+        /* Scroll reveals, replayed on every entry. Rise from below going down, settle from above going up.
+           Hidden state snaps back only once fully off screen, so the reset is never seen. */
+        .x-anim { --x-shift: 10px; }
+        .x-anim.x-up { --x-shift: -10px; }
+        .x-anim .x-reveal { opacity: 0; translate: 0 var(--x-shift); transition: none; }
+        .x-anim .x-reveal.is-in { opacity: 1; translate: 0 0; transition: opacity 520ms cubic-bezier(0.25, 0.1, 0.25, 1) var(--x-delay, 0ms), translate 560ms cubic-bezier(0.25, 0.1, 0.25, 1) var(--x-delay, 0ms); }
+
+        /* Steps and their line */
+        .x-anim .x-flow__step::after { transform: scaleX(0); transition: none; }
+        .x-anim .x-flow__step.is-in::after { transform: scaleX(1); transition: transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1) calc(var(--x-delay, 0ms) + 120ms); }
+        .x-anim.x-up .x-flow__step::after { transform-origin: right center; }
+        @media (max-width: 760px) {
+          .x-anim .x-flow__step::after { transform: scaleY(0); }
+          .x-anim .x-flow__step.is-in::after { transform: scaleY(1); }
+          .x-anim.x-up .x-flow__step::after { transform-origin: center bottom; }
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .x-lift, .x-glass, .x-glass::before, .x-ind, .x-topbar .seg a { transition: none; }
+        a.x-glass:active, button.x-glass:active { transform: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="top">
+      <a class="x-brand" href="#top" aria-label="Bukie Digital Solutions, back to top"
+        ><span class="x-logo-chip"><img src="bds-logo-final.png" alt="" /></span><span class="x-brand__name">Bukie Digital Solutions</span></a
+      >
+      <header class="nav glass x-topbar x-glass" data-auto></header>
+      <main class="main">
+        <section class="hero">
+          <img class="hero__img" src="bds-office-hero.webp" alt="A developer's desk at dusk with a city skyline view" />
+          <div class="hero__copy">
+            <h1>Bukie Digital Solutions</h1>
+            <p class="hero__sub">Software, apps and AI tools built in Nigeria for real users.</p>
+            <p class="hero__meta">Based in Abuja, Nigeria</p>
+            <p class="x-type" role="img" aria-label="We build websites that convert, mobile apps people enjoy, AI tools that save time, and systems that grow with you.">
+              <span aria-hidden="true" class="x-type__live">We build <span class="x-type__word" id="x-type-word">websites that convert.</span><span class="x-type__cursor"></span></span>
+              <span aria-hidden="true" class="x-type__static">We build websites, mobile apps, AI tools and systems that grow with you.</span>
+            </p>
+            <div class="links">
+              <a class="btn x-glass x-btn--primary" href="mailto:bukiedigitalsolutions@gmail.com"><span>Start a project</span></a>
+              <a class="btn x-glass x-btn--wa" href="https://wa.me/2347064844203" target="_blank" rel="noopener"><span>Chat on WhatsApp</span><span class="x-ext" aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="services" data-nav="What we do">
+          <div class="head">
+            <p class="head__eyebrow">What we do</p>
+            <h2>Software, data and design for how your business works.</h2>
+          </div>
+
+          <div class="x-group">
+            <h3 class="x-group__title">Build</h3>
+            <ul class="x-svc" data-step="50">
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 5.3c0-.9.6-1.5 1.5-1.4l13.9-.1c.9 0 1.5.6 1.4 1.5l.1 13.3c0 .9-.6 1.5-1.5 1.4H5c-.9.1-1.5-.5-1.4-1.4z"/><path d="M3.8 8.1c5.5.2 11 .1 16.5-.1"/><path d="M9.3 11.2l-2.2 2.4 2.3 2.2"/><path d="M14.7 11.1l2.2 2.5-2.3 2.3"/><path class="g" d="M12.8 10.8l-1.5 5.6"/></svg>
+                <div><b>Custom software</b><span>Applications and architecture shaped around how your business runs.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 9.1l1.5-4.8 14.3.1 1.4 4.7"/><path d="M3.4 9.1c0 1.3 1 2.2 2.2 2.2s2.1-.9 2.1-2.1c0 1.2 1 2.1 2.2 2.1s2.1-.9 2.1-2.1c.1 1.2 1 2.1 2.2 2.1s2.1-.9 2.1-2.1c0 1.2.9 2.2 2.1 2.2s2.1-.9 2.1-2.2"/><path d="M5.1 11.3l-.1 8.5c4.7.2 9.4.1 14.1 0l.1-8.6"/><path class="g" d="M10.1 19.8v-4.5c0-.6.4-.9.9-.9h2.2c.6 0 .9.4.9.9l.1 4.5"/></svg>
+                <div><b>Web and e-commerce</b><span>Fast, responsive websites and online stores.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.3 3.9c0-.8.6-1.4 1.4-1.4l6.9.1c.8 0 1.3.5 1.3 1.3l.1 16.2c0 .8-.6 1.4-1.4 1.4H8.6c-.8 0-1.4-.5-1.3-1.3z"/><path d="M10.7 5.3c.9-.1 1.7 0 2.6 0"/><path class="g" d="M11.3 18.4c.2-.5.9-.6 1.3-.2.4.4.2 1.1-.4 1.2-.6.1-1-.4-.9-1z"/></svg>
+                <div><b>Mobile apps</b><span>iOS and Android, native or cross-platform with React Native and Flutter.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.7 5.7c0-.9.5-1.6 1.4-1.6l9.4.1"/><path d="M3.7 5.7l.1 12.9c0 .9.6 1.4 1.5 1.4l13.2-.1c.9 0 1.5-.5 1.4-1.4l.1-5.2"/><path d="M11.1 13.3l1.2-4.1 5.9-5.1 2.5 2.5-5.1 5.9z"/><path class="g" d="M11.3 13.1l2.8-2.7"/></svg>
+                <div><b>UI/UX design</b><span>Clear, accessible interfaces and design systems.</span></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="x-group">
+            <h3 class="x-group__title">Data and AI</h3>
+            <ul class="x-svc" data-step="50">
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.7 10c2.3-.1 4.2 1.8 4.1 4.2 0 2.3-1.9 4.2-4.3 4.1-2.3 0-4.1-1.9-4.1-4.2.1-2.3 2-4.1 4.3-4.1z"/><path d="M9.6 12.6c.9 0 1.6.7 1.6 1.6 0 .9-.7 1.6-1.6 1.6-.9 0-1.6-.7-1.6-1.6 0-.9.7-1.6 1.6-1.6z"/><path d="M9.6 8.5v1.4M9.6 18.4v1.4M4 14.2h1.4M13.9 14.2h1.3M5.6 10.2l1 .9M12.6 17.3l1 1M5.6 18.2l1-.9M12.7 11.1l.9-.9"/><path class="g" d="M17.6 3.1c.3 1.7 1 2.5 2.7 2.8-1.7.3-2.4 1-2.7 2.7-.3-1.7-1.1-2.4-2.8-2.7 1.7-.3 2.5-1.1 2.8-2.8z"/></svg>
+                <div><b>AI and automation</b><span>AI tools and automated workflows that take over repetitive work.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.8 3.9l.1 15.8c0 .3.2.5.5.5l15.8-.1"/><path d="M8.1 17.1v-3.9M12.1 17.2l-.1-5.6M16.1 17.1V10"/><path class="g" d="M7.4 10.2l3.6-3.3 3.1 2 4.8-4.5M16.5 4.3l2.5-.1-.1 2.5"/></svg>
+                <div><b>Data analytics and BI</b><span>Dashboards, reports and predictive models.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6.2c0-1.3 3.1-2.3 7-2.3s7.1 1 7 2.3c0 1.3-3.1 2.4-7 2.4S5 7.5 5 6.2z"/><path d="M5 6.2l.1 11.5c0 1.3 3 2.4 6.9 2.4 3.9 0 7-1.1 7-2.4l.1-11.5"/><path d="M5.1 11.9c0 1.3 3 2.4 6.9 2.4 3.9 0 7-1 7-2.3"/><path class="g" d="M15.3 17.2l1.5-.2"/></svg>
+                <div><b>Databases</b><span>Design and performance tuning for MySQL, PostgreSQL, MongoDB and Redis.</span></div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="x-group">
+            <h3 class="x-group__title">Run and support</h3>
+            <ul class="x-svc" data-step="50">
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.4 17.6c-2.2.1-3.9-1.5-3.9-3.5 0-1.9 1.5-3.4 3.4-3.5.5-2.8 2.9-4.8 5.7-4.7 2.6 0 4.6 1.7 5.3 4.1 2 .2 3.6 1.8 3.6 3.8 0 2.1-1.6 3.8-3.8 3.8"/><path class="g" d="M12 20.6l.1-7.2M9.4 15.9l2.7-2.6 2.5 2.7"/></svg>
+                <div><b>Cloud and DevOps</b><span>Cloud migration, Docker, Kubernetes and CI/CD on AWS, Google Cloud and Azure.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 10.2l8.3-.1-.1 3.3c0 2.2-1.8 3.9-4 3.9-2.3 0-4.1-1.8-4.1-4z"/><path d="M10.1 10.1V5.8M14.1 10.1l-.1-4.4"/><path class="g" d="M12.1 17.3l-.1 1.6c0 1.3.9 2.2 2.2 2.2h1.7"/></svg>
+                <div><b>APIs and integrations</b><span>REST and GraphQL APIs, payment and third-party integrations.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.1c2.4 1.5 4.6 2.1 7.3 2.2.2 6.7-1.9 11.6-7.3 15.6-5.4-4-7.5-9-7.3-15.6 2.7-.1 4.9-.7 7.3-2.2z"/><path class="g" d="M8.9 12.1l2.2 2.2 4-4.4"/></svg>
+                <div><b>Security and QA</b><span>Secure authentication, encryption, vulnerability checks and automated testing.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.4 4.1c3.5 0 6.2 2.8 6.1 6.3 0 3.4-2.8 6.1-6.3 6.1-3.4-.1-6.1-2.9-6.1-6.3.1-3.4 2.9-6.2 6.3-6.1z"/><path d="M14.9 15l5.4 5.3"/><path class="g" d="M8.7 8.6l-1.7 1.8 1.7 1.7M12.1 8.6l1.7 1.8-1.8 1.7"/></svg>
+                <div><b>Consulting and code audits</b><span>Technical advice and reviews of existing code.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.6 3.8l11.5-.1c.4 0 .6.3.6.6l.1 8.2c0 .4-.3.6-.6.6h-5.6"/><path d="M5.7 7.1c1 0 1.9.8 1.9 1.9 0 1-.9 1.9-1.9 1.8-1 0-1.9-.8-1.8-1.9 0-1 .8-1.8 1.8-1.8z"/><path d="M2.7 20.3c0-2.8 1.3-4.8 3-4.7 1.7 0 3 1.9 3 4.7"/><path d="M7.4 13.2l3.1-2.5"/><path d="M15.7 14.7c.9 0 1.6.7 1.6 1.6 0 .9-.7 1.5-1.6 1.5-.9 0-1.5-.7-1.5-1.6 0-.8.7-1.5 1.5-1.5z"/><path d="M13.1 21c.2-1.6 1.2-2.5 2.6-2.5 1.3 0 2.3.9 2.5 2.5"/><path class="g" d="M11.9 8.2l2.1-1.3 1.7 1.1 2.4-1.7"/></svg>
+                <div><b>Training and mentorship</b><span>Hands-on support for development teams.</span></div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section" id="founder" data-nav="Founder">
+          <div class="head">
+            <p class="head__eyebrow">Who we are</p>
+            <h2>About the founder</h2>
+          </div>
+          <div class="x-id">
+            <img class="x-id__avatar" src="founder-avatar.jpg" width="112" height="112" alt="Solomon Ogar Bukie" />
+            <div>
+              <h3 class="x-id__name">Solomon Ogar Bukie</h3>
+              <p class="x-id__role">CEO &amp; Founder, Bukie Digital Solutions</p>
+              <p class="x-id__sub">Full Stack Developer and Digital Solutions Expert</p>
+            </div>
+          </div>
+          <div class="prose">
+            <p>Solomon is a full stack developer with experience across software development, data analysis and digital design. He founded Bukie Digital Solutions to help organisations improve their digital presence and run their operations better.</p>
+            <p>He starts every project with the business goals and the people who will use the product, works with technical teams and business owners alike, and keeps projects clear, on time and within budget.</p>
+          </div>
+          <div class="x-skills">
+            <p class="x-skills__label">Skills and tools</p>
+            <dl>
+              <div class="row"><dt>Languages</dt><dd>Python, JavaScript, Java, C++, SQL</dd></div>
+              <div class="row"><dt>Frontend</dt><dd>React, Angular, Vue.js</dd></div>
+              <div class="row"><dt>Backend</dt><dd>Node.js, Django, Flask</dd></div>
+              <div class="row"><dt>Mobile</dt><dd>Swift, Kotlin, React Native, Flutter</dd></div>
+              <div class="row"><dt>Data</dt><dd>Power BI, Tableau, Pandas</dd></div>
+              <div class="row"><dt>Databases</dt><dd>PostgreSQL, MySQL, MongoDB, Redis</dd></div>
+              <div class="row"><dt>Cloud and DevOps</dt><dd>AWS, Google Cloud, Azure, Docker, Kubernetes</dd></div>
+              <div class="row"><dt>Design</dt><dd>Figma</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="section" id="process" data-nav="How we work">
+          <div class="head">
+            <p class="head__eyebrow">How we work</p>
+            <h2>Four steps, agreed in writing and visible along the way.</h2>
+          </div>
+          <ol class="x-flow">
+            <li class="x-flow__step"><span class="x-flow__node" aria-hidden="true"></span><p class="x-flow__num">01</p><h3>Understand the problem and the users.</h3></li>
+            <li class="x-flow__step"><span class="x-flow__node" aria-hidden="true"></span><p class="x-flow__num">02</p><h3>Agree scope, price and timeline in writing.</h3></li>
+            <li class="x-flow__step"><span class="x-flow__node" aria-hidden="true"></span><p class="x-flow__num">03</p><h3>Build in small, visible steps you can test.</h3></li>
+            <li class="x-flow__step"><span class="x-flow__node" aria-hidden="true"></span><p class="x-flow__num">04</p><h3>Launch, then support and improve.</h3></li>
+          </ol>
+        </section>
+
+        <section class="section x-tight x-tint" id="next" data-nav="What's next">
+          <div class="head">
+            <p class="head__eyebrow">What's next</p>
+            <h2>Building and fine-tuning AI models on open-weight foundations for African businesses and users.</h2>
+          </div>
+        </section>
+
+        <section class="section" id="ways">
+          <div class="head">
+            <p class="head__eyebrow">Ways to work with us</p>
+            <h2>One project or an ongoing partnership.</h2>
+          </div>
+          <div class="x-ways" data-step="80">
+            <div>
+              <h3>Short-term projects</h3>
+              <p>A clear scope, price and timeline for one product, feature or fix.</p>
+            </div>
+            <div>
+              <h3>Long-term partnerships</h3>
+              <p>Ongoing development, support and improvement as your business grows.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section x-tint x-cta" id="start">
+          <div class="head">
+            <h2>Have a project in mind?</h2>
+            <p class="head__sub">Tell us what you need.</p>
+          </div>
+          <div class="links">
+            <a class="btn x-glass x-btn--primary" href="mailto:bukiedigitalsolutions@gmail.com"><span>Start a project</span></a>
+            <a class="btn x-glass x-btn--wa" href="https://wa.me/2347064844203" target="_blank" rel="noopener"><span>Chat on WhatsApp</span><span class="x-ext" aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
+        <section class="section" id="contact" data-nav="Contact">
+          <div class="head">
+            <p class="head__eyebrow">Contact</p>
+            <h2>Talk to Solomon directly.</h2>
+          </div>
+          <ul class="x-contact" data-step="60">
+            <li><small>Email</small><a class="link" href="mailto:bukiedigitalsolutions@gmail.com">bukiedigitalsolutions@gmail.com</a></li>
+            <li><small>Phone</small><a class="link" href="tel:+2347064844203">+234 706 484 4203</a></li>
+            <li><small>WhatsApp</small><a class="link" href="https://wa.me/2347064844203" target="_blank" rel="noopener">+234 706 484 4203</a></li>
+          </ul>
+        </section>
+      </main>
+      <footer class="foot">
+        <p class="x-foot-brand"><span class="x-logo-chip"><img src="bds-logo-final.png" alt="Bukie Digital Solutions logo" /></span>© 2026 Bukie Digital Solutions</p>
+        <nav aria-label="Back to sections" data-auto></nav>
+      </footer>
+    </div>
+    <script src="site.js"></script>
+    <script>
+      (function () {
+        function init() {
+          var doc = document;
+          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          var hasIO = "IntersectionObserver" in window;
+
+          // Top bar: add the "Start a project" button and turn solid past the hero
+          var bar = doc.querySelector(".x-topbar");
+          var hero = doc.querySelector(".hero");
+          if (bar && !bar.querySelector(".x-nav-cta")) {
+            var cta = doc.createElement("a");
+            cta.className = "x-nav-cta x-glass x-btn--primary";
+            cta.href = "mailto:bukiedigitalsolutions@gmail.com";
+            cta.setAttribute("aria-label", "Start a project");
+            cta.innerHTML = '<span>Start<span class="x-cta-more"> a project</span></span>';
+            var theme = bar.querySelector(".theme-btn");
+            bar.insertBefore(cta, theme);
+          }
+          // Top bar: move the static brand mark in, left of the section tabs
+          var brand = doc.querySelector(".page > .x-brand");
+          if (bar && brand) bar.insertBefore(brand, bar.firstChild);
+
+          // Section links: one glass pill that slides to the current section (IntersectionObserver driven)
+          var oldSeg = bar && bar.querySelector(".seg");
+          if (oldSeg && hasIO) {
+            // A fresh copy of the row, so this script alone sets the active link
+            var seg = oldSeg.cloneNode(true);
+            oldSeg.parentNode.replaceChild(seg, oldSeg);
+            var links = [].slice.call(seg.querySelectorAll("a"));
+            links.forEach(function (a) { a.removeAttribute("aria-current"); });
+            var ind = doc.createElement("span");
+            ind.className = "x-ind";
+            ind.setAttribute("aria-hidden", "true");
+            seg.insertBefore(ind, seg.firstChild);
+            seg.classList.add("x-has-ind");
+
+            var secs = links.map(function (a) { return doc.getElementById(a.getAttribute("href").slice(1)); });
+            var cur = -1, placed = false, lockTimer = 0, locked = false;
+            var inBand = new Map(), heroIn = false, footIn = false;
+
+            var edges = function () {
+              var max = seg.scrollWidth - seg.clientWidth;
+              seg.classList.toggle("x-fl", seg.scrollLeft > 2);
+              seg.classList.toggle("x-fr", seg.scrollLeft < max - 2);
+            };
+            var place = function () {
+              if (cur < 0) {
+                // Hidden pill: no size and no box behind any link
+                ind.style.transition = "none";
+                ind.style.opacity = "0";
+                ind.style.visibility = "hidden";
+                ind.style.width = "0px";
+                placed = false;
+                return;
+              }
+              var a = links[cur];
+              if (!placed) ind.style.transition = "none";
+              ind.style.width = a.offsetWidth + "px";
+              ind.style.transform = "translateX(" + a.offsetLeft + "px)";
+              ind.style.visibility = "visible";
+              ind.style.opacity = "1";
+              if (!placed) { void ind.offsetWidth; ind.style.transition = ""; placed = true; }
+            };
+            // Centre the active pill in the link row only; the page itself never scrolls
+            var center = function () {
+              if (cur < 0 || seg.scrollWidth <= seg.clientWidth) return;
+              var a = links[cur];
+              var left = a.offsetLeft - (seg.clientWidth - a.offsetWidth) / 2;
+              seg.scrollTo({ left: Math.max(0, left), behavior: reduce ? "auto" : "smooth" });
+            };
+            var setActive = function (i) {
+              if (i === cur) return;
+              cur = i;
+              links.forEach(function (a, k) { if (k === i) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+              place();
+              center();
+            };
+            var pick = function () {
+              if (locked) return;
+              if (footIn) return setActive(links.length - 1);
+              if (heroIn) return setActive(-1);
+              for (var i = secs.length - 1; i >= 0; i--) {
+                if (secs[i] && inBand.get(secs[i])) return setActive(i);
+              }
+              // Between sections: keep the current pill, so it never flickers
+            };
+
+            var band = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                if (e.target === hero) heroIn = e.isIntersecting;
+                else inBand.set(e.target, e.isIntersecting);
+              });
+              pick();
+            }, { rootMargin: "-30% 0px -65% 0px" });
+            if (hero) band.observe(hero);
+            secs.forEach(function (s) { if (s) band.observe(s); });
+
+            var foot = doc.querySelector(".foot");
+            if (foot) new IntersectionObserver(function (entries) {
+              footIn = entries[0].isIntersecting;
+              pick();
+            }).observe(foot);
+
+            // A tap moves the pill at once and holds it there while the page scrolls
+            var unlock = function () { clearTimeout(lockTimer); if (!locked) return; locked = false; pick(); };
+            links.forEach(function (a, i) {
+              a.addEventListener("click", function () {
+                setActive(i);
+                locked = true;
+                clearTimeout(lockTimer);
+                lockTimer = setTimeout(unlock, 1200);
+              });
+            });
+            if ("onscrollend" in window) window.addEventListener("scrollend", function () { if (locked) { clearTimeout(lockTimer); lockTimer = setTimeout(unlock, 60); } });
+
+            seg.addEventListener("scroll", edges, { passive: true });
+            var refit = function () { var keep = seg.querySelector(".x-ind"); if (keep && cur >= 0) { keep.style.transition = "none"; place(); void keep.offsetWidth; keep.style.transition = ""; } edges(); };
+            if ("ResizeObserver" in window) new ResizeObserver(refit).observe(seg);
+            else window.addEventListener("resize", refit, { passive: true });
+            if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(refit);
+            edges();
+          }
+
+          // Hero typing line
+          var word = doc.getElementById("x-type-word");
+          if (word && !reduce) {
+            var phrases = ["websites that convert.", "mobile apps people enjoy.", "AI tools that save time.", "systems that grow with you."];
+            var p = 0, n = phrases[0].length, deleting = true;
+            var tick = function () {
+              var wait;
+              if (deleting) {
+                n--;
+                wait = 38;
+                if (n <= 0) { n = 0; deleting = false; p = (p + 1) % phrases.length; wait = 420; }
+              } else {
+                n++;
+                wait = 70;
+                if (n >= phrases[p].length) { deleting = true; wait = 2000; }
+              }
+              word.textContent = phrases[p].slice(0, n);
+              setTimeout(tick, wait);
+            };
+            setTimeout(tick, 2400);
+          }
+          if (bar && hero && hasIO) {
+            new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) { bar.classList.toggle("is-solid", !e.isIntersecting); });
+            }, { rootMargin: "-72px 0px 0px 0px" }).observe(hero);
+          } else if (bar) {
+            bar.classList.add("is-solid");
+          }
+
+          // Scroll reveals that replay on every entry, in both directions
+          if (reduce || !hasIO) return;
+          var root = doc.documentElement;
+          root.classList.add("x-anim");
+
+          // Direction: rise from below going down, settle from above going up
+          var lastY = window.scrollY, up = false;
+          window.addEventListener("scroll", function () {
+            var y = window.scrollY;
+            if (Math.abs(y - lastY) < 4) return;
+            var nowUp = y < lastY;
+            lastY = y;
+            if (nowUp !== up) { up = nowUp; root.classList.toggle("x-up", up); }
+          }, { passive: true });
+
+          // Each target: a single element, or a group whose children stagger in
+          var targets = [];
+          [].slice.call(doc.querySelectorAll(".section > .head")).forEach(function (h) { targets.push({ el: h, items: [h], step: 0 }); });
+          [].slice.call(doc.querySelectorAll(".x-svc, .x-ways, .x-contact")).forEach(function (g) { targets.push({ el: g, items: [].slice.call(g.children), step: parseInt(g.getAttribute("data-step") || "60", 10) }); });
+          [].slice.call(doc.querySelectorAll(".x-id, #founder > .prose, .x-skills")).forEach(function (g) { targets.push({ el: g, items: [g], step: 0 }); });
+          [].slice.call(doc.querySelectorAll(".x-flow")).forEach(function (g) { targets.push({ el: g, items: [].slice.call(g.children), step: 120 }); });
+
+          var byEl = new Map();
+          targets.forEach(function (t) {
+            t.items.forEach(function (c) { c.classList.add("x-reveal"); });
+            byEl.set(t.el, t);
+          });
+
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              var t = byEl.get(e.target);
+              if (!t) return;
+              if (e.isIntersecting && e.intersectionRatio >= 0.12) {
+                if (t.on) return;
+                t.on = true;
+                var last = t.items.length - 1;
+                t.items.forEach(function (c, i) {
+                  // Going up, the stagger runs from the bottom item
+                  c.style.setProperty("--x-delay", (up ? last - i : i) * t.step + "ms");
+                  c.classList.add("is-in");
+                });
+              } else if (!e.isIntersecting) {
+                // Fully off screen: reset, ready to play again
+                t.on = false;
+                t.items.forEach(function (c) { c.classList.remove("is-in"); });
+              }
+            });
+          }, { threshold: [0, 0.12] });
+          targets.forEach(function (t) { io.observe(t.el); });
+        }
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+        else init();
+      })();
+    </script>
+  </body>
+</html>
