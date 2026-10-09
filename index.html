@@ -833,10 +833,12 @@
       })();
     </script>
     <script>
-      /* Show the theme hint once per visitor, shortly after the page opens */
+      /* Show the theme hint on a visitor's first three visits, shortly after the page opens */
       (function () {
-        try { if (localStorage.getItem("site-theme-hint") || localStorage.getItem("site-theme")) return; } catch (e) { return; }
-        function done() { try { localStorage.setItem("site-theme-hint", "1"); } catch (e) {} }
+        var seen = 0;
+        try { seen = parseInt(localStorage.getItem("site-theme-hint") || "0", 10) || 0; } catch (e) {}
+        if (seen >= 3) return;
+        function done() { try { localStorage.setItem("site-theme-hint", String(seen + 1)); } catch (e) {} }
         window.addEventListener("load", function () {
           setTimeout(function () {
             var btn = document.getElementById("theme-btn");
@@ -846,7 +848,8 @@
             var tip = document.createElement("div");
             tip.className = "x-theme-hint";
             tip.setAttribute("role", "status");
-            tip.textContent = "Prefer light mode? Tap here to switch.";
+            var t = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+            tip.textContent = t === "dark" ? "Prefer light mode? Tap here to switch." : "Prefer dark mode? Tap here to switch.";
             document.body.appendChild(tip);
             var w = tip.offsetWidth, left = Math.max(12, Math.min(r.right - w + 6, window.innerWidth - w - 12));
             tip.style.top = (r.bottom + 12) + "px";
