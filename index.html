@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400&display=swap"
     />
     <link rel="stylesheet" href="site.css" />
     <link rel="stylesheet" href="site-hero.css" />
@@ -423,6 +423,10 @@
       @media (prefers-reduced-motion: reduce) {
         .x-lift, .x-glass, .x-glass::before, .x-ind, .x-topbar .seg a { transition: none; }
         a.x-glass:active, button.x-glass:active { transform: none; }
+      }
+      /* Phones: company name on one line, bold, sized to the available width */
+      @media (max-width: 760px) {
+        .hero h1 { white-space: nowrap; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; font-size: min(calc((100vw - 2 * var(--gutter) - 48px) / 11.4), 2.75rem); }
       }
     </style>
   </head>
