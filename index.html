@@ -31,7 +31,7 @@
       .x-logo-chip { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #fff; }
       .x-logo-chip img { width: 24px; height: 24px; object-fit: contain; }
       .x-brand:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: var(--r-pill); }
-      header.nav .x-brand { color: #fff; border-radius: var(--r-pill); }
+      header.nav .x-brand { border-radius: var(--r-pill); }
       @media (max-width: 760px) { .x-brand__name { display: none; } header.nav .x-brand { padding: 0; min-height: var(--tap); min-width: var(--tap); justify-content: center; } }
       .x-foot-brand { display: inline-flex; align-items: center; gap: 10px; }
       .x-foot-brand .x-logo-chip { width: 28px; height: 28px; box-shadow: 0 0 0 1px var(--stroke-secondary); }
@@ -41,21 +41,22 @@
       :root {
         --bevel-md: inset 2px 2px 1px -3px hsl(0 0% 100% / .8), inset 2px 2px 1px -3px hsl(0 0% 100% / .5), inset 1px 1px 1px -.5px hsl(0 0% 100% / .15), inset 1px 1px .25px hsl(0 0% 100% / .03), inset 0 0 .25px .5px hsl(0 0% 100% / .03), inset 0 1px 0 hsl(0 0% 100% / .14), inset 0 -1px 0 hsl(225 50% 8% / .14);
         --bevel-sm: inset 1px 1px 1px -2px hsl(0 0% 100% / .8), inset 1px 1px .5px -1.5px hsl(0 0% 100% / .5), inset .5px .5px .5px -.25px hsl(0 0% 100% / .15), inset 0 1px 0 hsl(0 0% 100% / .16), inset 0 -1px 0 hsl(225 50% 8% / .12);
-        --x-glass-blur: blur(24px) saturate(1.6) brightness(1.05);
+        --x-glass-blur: blur(20px) saturate(1.8);
+        --x-hairline: hsl(0 0% 100% / .35);
+        --x-on-photo-shadow: 0 1px 2px hsl(225 50% 6% / .55), 0 0 8px hsl(225 50% 6% / .25);
         --x-glass-shadow: 0 6px 20px -8px rgba(15, 25, 60, .35);
         --x-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         --x-spring: cubic-bezier(.34, 1.56, .64, 1);
         --x-slide: cubic-bezier(.22, .61, .36, 1);
       }
       .x-glass {
-        --x-fill: hsl(0 0% 100% / .18);
-        --x-fill-hover: hsl(0 0% 100% / .24);
+        --x-fill: hsl(0 0% 100% / .10);
         --x-bevel: var(--bevel-md);
         isolation: isolate;
         background: transparent;
-        border-color: transparent;
+        border: 1px solid var(--x-hairline);
         box-shadow: var(--x-glass-shadow);
-        transition: transform 120ms var(--x-spring), box-shadow var(--dur-quick) ease;
+        transition: transform 120ms var(--x-spring), box-shadow var(--dur-quick) ease, color 250ms ease;
       }
       .x-glass:not(.nav) { position: relative; }
       .x-glass::before, .x-glass::after, .btn.x-glass[target]::after {
@@ -75,16 +76,19 @@
       }
       .x-glass::after, .btn.x-glass[target]::after { box-shadow: var(--x-bevel); font-size: 0; }
       .x-glass > * { position: relative; z-index: 1; }
-      a.x-glass:hover, button.x-glass:hover { --x-fill: var(--x-fill-hover); box-shadow: var(--x-glass-shadow); }
+      /* Hover: a faint white lift on top of the tint, so it brightens without hiding what is behind */
+      a.x-glass:hover::before, button.x-glass:hover::before { background-image: linear-gradient(hsl(0 0% 100% / .12), hsl(0 0% 100% / .12)), var(--x-noise); }
+      a.x-glass:hover, button.x-glass:hover { box-shadow: var(--x-glass-shadow), 0 0 0 1px hsl(0 0% 100% / .12); }
       a.x-glass:active, button.x-glass:active { transform: scale(.97); }
 
-      /* Glass buttons: pill shape, tinted fills */
-      .btn.x-glass { min-height: var(--tap); padding: 0 18px; border-radius: var(--r-pill); font: var(--type-label); }
-      .x-btn--primary { --x-fill: hsl(225 55% 24% / .72); --x-fill-hover: hsl(225 55% 28% / .78); --x-solid: hsl(225 55% 24%); color: #fff; }
-      .x-btn--wa { --x-fill: hsl(150 55% 27% / .9); --x-fill-hover: hsl(150 55% 28% / .94); --x-solid: hsl(150 55% 24%); color: #fff; }
-      .hero .x-btn--wa { --x-fill: hsl(150 55% 27% / .72); --x-fill-hover: hsl(150 55% 29% / .8); }
-      .x-btn--soft { --x-fill: light-dark(hsl(225 40% 20% / .06), hsl(0 0% 100% / .08)); --x-fill-hover: light-dark(hsl(225 40% 20% / .1), hsl(0 0% 100% / .13)); --x-solid: var(--x-navy-tint); --x-bevel: var(--bevel-sm); color: var(--x-navy-ink); }
-      .hero .x-btn--soft { --x-fill: hsl(0 0% 100% / .18); --x-fill-hover: hsl(0 0% 100% / .24); --x-solid: hsl(225 30% 22%); color: #fff; }
+      /* Glass buttons: pill shape, a faint tint only. Text ink follows the background behind the glass */
+      .btn.x-glass { min-height: var(--tap); padding: 0 18px; border-radius: var(--r-pill); font: var(--type-label); color: var(--x-ink); }
+      .x-btn--primary { --x-fill: hsl(225 55% 24% / .18); --x-ink: light-dark(#1B2A5E, #fff); }
+      .x-btn--wa { --x-fill: hsl(150 55% 27% / .18); --x-ink: light-dark(#14502f, #fff); }
+      .x-btn--soft { --x-fill: hsl(0 0% 100% / .10); --x-ink: light-dark(#1B2A5E, #fff); --x-bevel: var(--bevel-sm); }
+      .btn.x-glass:not(.hero .x-glass) { box-shadow: var(--x-glass-shadow), 0 0 0 1px light-dark(hsl(225 40% 20% / .10), transparent); }
+      /* Over the hero photo: white text with a soft shadow, in both themes */
+      .hero .x-glass { --x-ink: #fff; text-shadow: var(--x-on-photo-shadow); }
       .x-ext { font-size: 12px; }
       .x-glass:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 3px; }
       .hero .x-glass:focus-visible, .x-topbar .x-glass:focus-visible { outline-color: #fff; }
@@ -93,30 +97,37 @@
       .hero > .callout { background: hsl(225 55% 16% / .55); border: 1px solid hsl(0 0% 100% / .14); color: #fff; box-shadow: var(--bevel-md), var(--x-glass-shadow); -webkit-backdrop-filter: var(--x-glass-blur); backdrop-filter: var(--x-glass-blur); background-image: var(--x-noise); }
       .hero > .callout .callout__head, .hero > .callout .fineprint { color: hsl(0 0% 100% / .85); }
 
-      /* Sticky top bar: deep navy glass with the sliding section pill */
+      /* Sticky top bar: near-clear glass with the sliding section pill.
+         Ink is navy over light sections, white in dark mode, and white with a soft shadow over the hero photo. */
       header.nav.x-topbar {
-        --x-fill: hsl(226 50% 12% / .72);
-        --x-solid: hsl(226 50% 12%);
+        --x-fill: light-dark(hsl(0 0% 100% / .10), hsl(225 40% 12% / .18));
+        --x-ink: light-dark(#1B2A5E, #fff);
+        --x-ink-2: light-dark(#26366b, #e6e9f2);
+        --x-shadow: none;
         background: transparent;
-        border: 1px solid hsl(0 0% 100% / .12);
+        border: 1px solid var(--x-hairline);
         -webkit-backdrop-filter: none;
         backdrop-filter: none;
         box-shadow: var(--x-glass-shadow);
-        color: #fff;
+        color: var(--x-ink);
         gap: 6px;
+        transition: color 250ms ease;
       }
-      header.nav.x-topbar.is-solid { --x-fill: hsl(226 50% 12% / .82); }
+      header.nav.x-topbar.x-on-hero { --x-ink: #fff; --x-ink-2: #f2f4fa; --x-shadow: var(--x-on-photo-shadow); }
       header.nav.x-topbar::before { border-radius: inherit; }
-      .x-topbar :focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-      .x-topbar .theme-btn { width: 40px; height: 40px; color: #fff; background: hsl(0 0% 100% / .1); box-shadow: var(--bevel-sm); }
-      .x-topbar .theme-btn:hover { background: hsl(0 0% 100% / .18); }
+      .x-topbar :focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+      .x-topbar .x-nav-cta { --x-ink: inherit; color: var(--x-ink); text-shadow: var(--x-shadow); }
+      .x-topbar .x-brand { color: inherit; text-shadow: var(--x-shadow); }
+      .x-topbar .theme-btn { width: 40px; height: 40px; color: inherit; background: light-dark(hsl(225 40% 20% / .06), hsl(0 0% 100% / .1)); box-shadow: var(--bevel-sm); filter: drop-shadow(var(--x-drop, 0 0 0 transparent)); }
+      .x-topbar.x-on-hero .theme-btn { background: hsl(0 0% 100% / .14); --x-drop: 0 1px 1px hsl(225 50% 6% / .45); }
+      .x-topbar .theme-btn:hover { background: hsl(0 0% 100% / .22); }
       .x-topbar .seg {
         --x-fl: 0px;
         --x-fr: 0px;
         position: relative;
         flex: 0 1 auto;
         min-width: 0;
-        background: hsl(226 42% 20% / .7);
+        background: transparent;
         scroll-snap-type: x proximity;
         overscroll-behavior-x: contain;
         -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--x-fl), #000 calc(100% - var(--x-fr)), transparent 100%);
@@ -134,13 +145,14 @@
         padding: 0 14px;
         white-space: nowrap;
         scroll-snap-align: center;
-        color: #e6e9f2;
+        color: var(--x-ink-2);
+        text-shadow: var(--x-shadow);
         transition: color 250ms ease;
       }
-      .x-topbar .seg a:hover { color: #fff; }
+      .x-topbar .seg a:hover { color: var(--x-ink); }
       .x-topbar .seg a:focus-visible { outline-offset: -3px; }
-      .x-topbar .seg.x-has-ind a[aria-current="true"] { background: transparent; color: var(--x-navy); }
-      .x-topbar .seg.x-has-ind a[aria-current="true"]:focus-visible { outline-color: var(--x-navy); }
+      .x-topbar .seg a[aria-current="true"] { background: transparent; color: var(--x-ink); }
+      .x-topbar .seg.x-has-ind a[aria-current="true"]:focus-visible { outline-color: currentColor; }
       .x-ind {
         position: absolute;
         top: 0;
@@ -150,24 +162,31 @@
         width: 0;
         visibility: hidden;
         border-radius: var(--r-pill);
-        background-color: hsl(0 0% 100% / .88);
+        background-color: hsl(0 0% 100% / .28);
         background-image: var(--x-noise);
         -webkit-backdrop-filter: var(--x-glass-blur);
         backdrop-filter: var(--x-glass-blur);
-        box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 hsl(225 40% 20% / .14), inset 1px 1px 1px -.5px hsl(0 0% 100% / .9), 0 2px 8px -2px rgba(0, 0, 0, .35);
+        /* Bevel, a soft inner glow and a faint edge so the clear pill still reads over light sections */
+        box-shadow: var(--bevel-sm), inset 0 0 10px hsl(0 0% 100% / .35), inset 0 0 0 1px hsl(0 0% 100% / .45), 0 1px 6px -1px light-dark(hsl(225 40% 20% / .22), hsl(0 0% 0% / .35));
         opacity: 0;
         pointer-events: none;
         will-change: transform, width;
         transition: transform 350ms var(--x-slide), width 350ms var(--x-slide), opacity 200ms ease;
       }
-      .x-nav-cta.x-glass { --x-fill: hsl(225 55% 32% / .85); --x-fill-hover: hsl(225 55% 36% / .9); --x-bevel: var(--bevel-sm); }
+      .x-nav-cta.x-glass { --x-fill: hsl(225 55% 24% / .18); --x-bevel: var(--bevel-sm); }
 
-      /* No backdrop-filter: solid tints with the same contrast */
+      /* No backdrop-filter: slightly more opaque fills so text stays readable without the blur */
       @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-        .x-glass::before { background-color: var(--x-solid, hsl(225 30% 22%)); }
-        a.x-glass:hover::before { filter: brightness(1.12); }
-        .x-nav-cta.x-glass::before { background-color: hsl(225 55% 32%); }
-        .x-ind { background-color: #fff; }
+        header.nav.x-topbar { --x-fill: light-dark(hsl(0 0% 100% / .86), hsl(225 40% 12% / .88)); }
+        header.nav.x-topbar.x-on-hero { --x-fill: hsl(225 45% 14% / .72); }
+        .x-btn--primary, .x-nav-cta.x-glass { --x-fill: light-dark(hsl(225 55% 24% / .14), hsl(225 55% 24% / .5)); }
+        .x-btn--wa { --x-fill: light-dark(hsl(150 55% 27% / .14), hsl(150 55% 27% / .5)); }
+        .x-btn--soft { --x-fill: light-dark(hsl(0 0% 100% / .6), hsl(225 40% 12% / .6)); }
+        .hero .x-btn--primary { --x-fill: hsl(225 55% 18% / .62); }
+        .hero .x-btn--wa { --x-fill: hsl(150 55% 18% / .62); }
+        .hero .x-btn--soft { --x-fill: hsl(225 45% 14% / .55); }
+        .x-ind { background-color: light-dark(hsl(0 0% 100% / .9), hsl(0 0% 100% / .16)); }
+        .x-on-hero .x-ind { background-color: hsl(0 0% 100% / .18); }
         .hero > .callout { background-color: hsl(225 55% 16% / .92); }
       }
 
@@ -669,12 +688,18 @@
             };
             setTimeout(tick, 2400);
           }
-          if (bar && hero && hasIO) {
-            new IntersectionObserver(function (entries) {
-              entries.forEach(function (e) { bar.classList.toggle("is-solid", !e.isIntersecting); });
-            }, { rootMargin: "-72px 0px 0px 0px" }).observe(hero);
-          } else if (bar) {
-            bar.classList.add("is-solid");
+          // Top bar ink: white over the hero photo, navy (or white in dark mode) over everything else
+          if (bar && hero) {
+            var inkQueued = false;
+            var syncInk = function () {
+              inkQueued = false;
+              var b = bar.getBoundingClientRect(), h = hero.getBoundingClientRect(), mid = b.top + b.height / 2;
+              bar.classList.toggle("x-on-hero", h.top < mid && h.bottom > mid);
+            };
+            var queueInk = function () { if (!inkQueued) { inkQueued = true; requestAnimationFrame(syncInk); } };
+            window.addEventListener("scroll", queueInk, { passive: true });
+            window.addEventListener("resize", queueInk, { passive: true });
+            syncInk();
           }
 
           // Scroll reveals that replay on every entry, in both directions
