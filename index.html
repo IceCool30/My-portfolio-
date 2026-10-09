@@ -433,6 +433,13 @@
       .x-art { transition: transform 260ms cubic-bezier(0.25, 0.1, 0.25, 1); }
       @media (max-width: 900px) { .x-art { width: 56px; height: 56px; margin-top: -4px; } }
       @media (prefers-reduced-motion: reduce) { .x-art { transition: none; } .x-svc--feat li:hover .x-art { transform: none; } }
+      /* First visit: a one-time hint that points at the theme toggle */
+      .x-theme-hint { position: fixed; z-index: 60; max-width: 220px; padding: 10px 14px; border-radius: 14px; font: var(--type-small); line-height: 1.35; color: #fff; background: hsl(225 45% 22%); box-shadow: 0 8px 24px hsl(225 50% 6% / .35); opacity: 0; transform: translateY(-4px); transition: opacity 240ms ease, transform 240ms ease; pointer-events: auto; cursor: pointer; }
+      .x-theme-hint.is-on { opacity: 1; transform: none; }
+      .x-theme-hint::before { content: ""; position: absolute; top: -6px; right: var(--x-arrow, 18px); width: 12px; height: 12px; background: inherit; transform: rotate(45deg); border-radius: 2px; }
+      .theme-btn.x-pulse { animation: x-pulse 1.4s ease-out 3; }
+      @keyframes x-pulse { 0% { box-shadow: 0 0 0 0 hsl(150 55% 50% / .7); } 100% { box-shadow: 0 0 0 12px hsl(150 55% 50% / 0); } }
+      @media (prefers-reduced-motion: reduce) { .x-theme-hint { transition: none; } .theme-btn.x-pulse { animation: none; } }
       /* Phones: a shorter hero with less empty photo above the name, and no sideways scroll */
       html, body { overflow-x: clip; }
       @media (max-width: 760px) { .hero__copy { padding-top: 150px; gap: 12px; } }
@@ -823,6 +830,42 @@
         }
         if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
         else init();
+      })();
+    </script>
+    <script>
+      /* Show the theme hint once per visitor, shortly after the page opens */
+      (function () {
+        try { if (localStorage.getItem("site-theme-hint") || localStorage.getItem("site-theme")) return; } catch (e) { return; }
+        function done() { try { localStorage.setItem("site-theme-hint", "1"); } catch (e) {} }
+        window.addEventListener("load", function () {
+          setTimeout(function () {
+            var btn = document.getElementById("theme-btn");
+            if (!btn || window.scrollY > 80) return;
+            var r = btn.getBoundingClientRect();
+            if (!r.width) return;
+            var tip = document.createElement("div");
+            tip.className = "x-theme-hint";
+            tip.setAttribute("role", "status");
+            tip.textContent = "Prefer light mode? Tap here to switch.";
+            document.body.appendChild(tip);
+            var w = tip.offsetWidth, left = Math.max(12, Math.min(r.right - w + 6, window.innerWidth - w - 12));
+            tip.style.top = (r.bottom + 12) + "px";
+            tip.style.left = left + "px";
+            tip.style.setProperty("--x-arrow", Math.max(10, left + w - (r.left + r.width / 2) - 6) + "px");
+            btn.classList.add("x-pulse");
+            requestAnimationFrame(function () { tip.classList.add("is-on"); });
+            done();
+            function hide() {
+              tip.classList.remove("is-on"); btn.classList.remove("x-pulse");
+              setTimeout(function () { tip.remove(); }, 300);
+              window.removeEventListener("scroll", hide); btn.removeEventListener("click", hide);
+            }
+            tip.addEventListener("click", function () { btn.click(); hide(); });
+            btn.addEventListener("click", hide);
+            window.addEventListener("scroll", hide, { passive: true });
+            setTimeout(hide, 6000);
+          }, 1200);
+        });
       })();
     </script>
   </body>
