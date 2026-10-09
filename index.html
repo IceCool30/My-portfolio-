@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bukie Digital Solutions</title>
-    <meta name="description" content="Software, apps and AI tools built in Nigeria for real users. Based in Abuja, Nigeria." />
+    <meta name="description" content="Websites, mobile apps and AI tools built for real users. Based in Abuja, Nigeria." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -318,6 +318,28 @@
       /* Calm rhythm: the one-line section sits tight */
       .x-tight .head { margin-bottom: 0; }
 
+      /* Polish: bolder subheadings, clearer hierarchy */
+      .head__eyebrow { font: var(--weight-bold) var(--size-body)/var(--lh) var(--sans); letter-spacing: 0.06em; color: var(--x-green-ink); }
+      .x-skills__label { font: var(--weight-bold) var(--size-body)/var(--lh) var(--sans); letter-spacing: 0.06em; color: var(--x-green-ink); margin-bottom: 8px; }
+      .x-group__title { font-weight: var(--weight-bold); }
+      .x-svc b { font-weight: var(--weight-bold); color: var(--x-navy-ink); }
+      .x-svc span { font-weight: var(--weight-regular); }
+      .x-ways h3, .x-flow h3, .x-id__name { font-weight: var(--weight-bold); }
+      .x-id__role { font-weight: var(--weight-bold); }
+      .x-skills dt { font-weight: var(--weight-bold); color: var(--text-primary); }
+      .x-skills .row { column-gap: 28px; }
+      @media (max-width: 599px) { .x-skills .row { row-gap: 6px; } }
+
+      /* Even rhythm around the tinted sections */
+      .main > .x-tint { margin-top: clamp(24px, 4vw, 48px); }
+
+      /* Contact: phone row with two small actions */
+      .x-contact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .x-contact__num { font: var(--type-body-strong); display: flex; align-items: center; min-height: var(--tap); }
+      .x-contact .links { margin-top: 2px; gap: 8px; }
+      .x-contact .btn.x-glass { padding: 0 16px; }
+      @media (max-width: 760px) { .x-contact { grid-template-columns: minmax(0, 1fr); } }
+
       @media (prefers-reduced-motion: no-preference) {
         html { scroll-behavior: smooth; }
 
@@ -359,7 +381,7 @@
           <img class="hero__img" src="bds-office-hero.webp" alt="A developer's desk at dusk with a city skyline view" />
           <div class="hero__copy">
             <h1>Bukie Digital Solutions</h1>
-            <p class="hero__sub">Software, apps and AI tools built in Nigeria for real users.</p>
+            <p class="hero__sub">Websites, mobile apps and AI tools built for real users.</p>
             <p class="hero__meta">Based in Abuja, Nigeria</p>
             <p class="x-type" role="img" aria-label="We build websites that convert, mobile apps people enjoy, AI tools that save time, and systems that grow with you.">
               <span aria-hidden="true" class="x-type__live">We build <span class="x-type__word" id="x-type-word">websites that convert.</span><span class="x-type__cursor"></span></span>
@@ -469,10 +491,10 @@
               <div class="row"><dt>Frontend</dt><dd>React, Angular, Vue.js</dd></div>
               <div class="row"><dt>Backend</dt><dd>Node.js, Django, Flask</dd></div>
               <div class="row"><dt>Mobile</dt><dd>Swift, Kotlin, React Native, Flutter</dd></div>
-              <div class="row"><dt>Data</dt><dd>Power BI, Tableau, Pandas</dd></div>
+              <div class="row"><dt>Data</dt><dd>Python (Pandas, NumPy), R, Power BI, Tableau</dd></div>
               <div class="row"><dt>Databases</dt><dd>PostgreSQL, MySQL, MongoDB, Redis</dd></div>
               <div class="row"><dt>Cloud and DevOps</dt><dd>AWS, Google Cloud, Azure, Docker, Kubernetes</dd></div>
-              <div class="row"><dt>Design</dt><dd>Figma</dd></div>
+              <div class="row"><dt>Design</dt><dd>Figma, Adobe Creative Suite, Sketch</dd></div>
             </dl>
           </div>
         </section>
@@ -532,8 +554,13 @@
           </div>
           <ul class="x-contact" data-step="60">
             <li><small>Email</small><a class="link" href="mailto:bukiedigitalsolutions@gmail.com">bukiedigitalsolutions@gmail.com</a></li>
-            <li><small>Phone</small><a class="link" href="tel:+2347064844203">+234 706 484 4203</a></li>
-            <li><small>WhatsApp</small><a class="link" href="https://wa.me/2347064844203" target="_blank" rel="noopener">+234 706 484 4203</a></li>
+            <li>
+              <small>Phone and WhatsApp</small><span class="x-contact__num">+234 706 484 4203</span>
+              <div class="links">
+                <a class="btn x-glass x-btn--soft" href="tel:+2347064844203"><span>Call</span></a>
+                <a class="btn x-glass x-btn--wa" href="https://wa.me/2347064844203" target="_blank" rel="noopener"><span>WhatsApp</span><span class="x-ext" aria-hidden="true">↗</span></a>
+              </div>
+            </li>
           </ul>
         </section>
       </main>
