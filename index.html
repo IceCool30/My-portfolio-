@@ -424,6 +424,15 @@
         .x-lift, .x-glass, .x-glass::before, .x-ind, .x-topbar .seg a { transition: none; }
         a.x-glass:active, button.x-glass:active { transform: none; }
       }
+      /* Headline offers: hand-drawn illustrations on a soft organic blob */
+      .x-art { flex: none; width: 64px; height: 64px; color: var(--x-navy-ink); overflow: visible; }
+      .x-art .b { fill: var(--x-green-ink); opacity: .16; stroke: none; }
+      .x-art .g { color: var(--x-green-ink); }
+      .x-art .f { fill: color-mix(in srgb, var(--x-green-ink) 28%, transparent); }
+      .x-svc--feat li:hover .x-art { transform: rotate(-4deg) scale(1.04); }
+      .x-art { transition: transform 260ms cubic-bezier(0.25, 0.1, 0.25, 1); }
+      @media (max-width: 900px) { .x-art { width: 56px; height: 56px; margin-top: -4px; } }
+      @media (prefers-reduced-motion: reduce) { .x-art { transition: none; } .x-svc--feat li:hover .x-art { transform: none; } }
       /* Phones: company name on one line, bold, sized to the available width */
       @media (max-width: 760px) {
         .hero h1 { white-space: nowrap; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1; font-size: min(calc((100vw - 2 * var(--gutter) - 48px) / 11.4), 2.75rem); }
@@ -458,15 +467,15 @@
 
           <ul class="x-svc x-svc--feat" data-step="80">
               <li>
-                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 9.1l1.5-4.8 14.3.1 1.4 4.7"/><path d="M3.4 9.1c0 1.3 1 2.2 2.2 2.2s2.1-.9 2.1-2.1c0 1.2 1 2.1 2.2 2.1s2.1-.9 2.1-2.1c.1 1.2 1 2.1 2.2 2.1s2.1-.9 2.1-2.1c0 1.2.9 2.2 2.1 2.2s2.1-.9 2.1-2.2"/><path d="M5.1 11.3l-.1 8.5c4.7.2 9.4.1 14.1 0l.1-8.6"/><path class="g" d="M10.1 19.8v-4.5c0-.6.4-.9.9-.9h2.2c.6 0 .9.4.9.9l.1 4.5"/></svg>
+                <svg class="x-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="b" d="M12.5 15.8C17.9 7.4 31.6 5.2 41.9 8.6c10.6 3.5 17.4 12.9 15.9 24.3-1.5 11.6-10.4 21.6-22.6 22.7C23 56.8 11.1 50.6 7.9 39.6 6 32.4 8.3 22.3 12.5 15.8z"/><path d="M12.6 17.4c0-1.6 1.2-2.7 2.8-2.7 11.2-.2 22.4-.1 33.6.1 1.5 0 2.6 1.1 2.6 2.6l-.2 25.9c0 1.5-1.2 2.6-2.7 2.6-11.1.2-22.3.1-33.5-.1-1.5 0-2.7-1.2-2.7-2.7z"/><path d="M12.8 22.6c12.8-.3 25.6-.2 38.4.1"/><path class="g" d="M16.3 18.7h.1M19.6 18.6h.1M22.9 18.7h.1"/><path d="M18.8 27.4c2.2 2.8 5.9 2.9 8.1 0 2.2 2.9 5.9 2.8 8.1 0 2.3 2.8 5.9 2.9 8.2-.1"/><path d="M19.8 30.1l.2 10.6c4.3.2 8.5.2 12.8 0"/><path class="g f" d="M38.1 34.3c2.3-.2 4.7-.1 7 .1l1.1 9.8c-3.1.4-6.2.4-9.3 0z"/><path class="g" d="M39.4 34.2c-.1-2.3.9-3.6 2.3-3.6 1.5 0 2.3 1.3 2.2 3.7"/></svg>
                 <div><h3><b>Websites and online stores</b></h3><span>Fast, responsive websites and e-commerce stores that work well on any phone.</span></div>
               </li>
               <li>
-                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.3 3.9c0-.8.6-1.4 1.4-1.4l6.9.1c.8 0 1.3.5 1.3 1.3l.1 16.2c0 .8-.6 1.4-1.4 1.4H8.6c-.8 0-1.4-.5-1.3-1.3z"/><path d="M10.7 5.3c.9-.1 1.7 0 2.6 0"/><path class="g" d="M11.3 18.4c.2-.5.9-.6 1.3-.2.4.4.2 1.1-.4 1.2-.6.1-1-.4-.9-1z"/></svg>
+                <svg class="x-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="b" d="M10.2 22.4C13.6 11.8 26.7 6.4 38.5 8.7c11.6 2.2 19.2 11.6 18.4 23.1-.8 12.4-9.8 22.9-22.9 23.6C21.4 56.1 10 48.3 8.4 37.5c-.7-5.2.1-10.1 1.8-15.1z"/><g transform="rotate(-7 30 33)"><path d="M20.5 12.8c0-1.9 1.4-3.1 3.2-3.1 5.2-.1 10.4-.1 15.6.1 1.8 0 3 1.3 3 3.1l.1 36.6c0 1.8-1.4 3-3.2 3-5.2.1-10.4.1-15.6-.1-1.8 0-3-1.2-3-3z"/><path d="M28.3 14c2-.1 4-.1 6.1.1"/><path class="g f" d="M24.9 20.3c1.9-.1 3.8-.1 5.7.1l.1 5.4c-1.9.2-3.8.2-5.7 0z"/><path d="M33.4 20.4c1.4-.1 2.8-.1 4.3 0l.1 5.3c-1.5.2-2.9.2-4.4 0zM25 29.6c1.4-.1 2.8-.1 4.3 0l.1 5.3c-1.5.2-2.9.2-4.4 0z"/><path class="g f" d="M33.3 29.6c1.4-.1 2.8-.1 4.3 0l.1 5.3c-1.5.2-2.9.2-4.4 0z"/><path d="M29.8 45.5c.9-.1 1.8-.1 2.7 0"/></g><path class="g" d="M48.2 14.1c.5 2.6 1.6 3.8 4.2 4.3-2.6.5-3.7 1.6-4.2 4.2-.5-2.6-1.7-3.7-4.3-4.2 2.6-.5 3.8-1.7 4.3-4.3z"/></svg>
                 <div><h3><b>Mobile apps</b></h3><span>iOS and Android apps, native or cross-platform with React Native and Flutter.</span></div>
               </li>
               <li>
-                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.7 10c2.3-.1 4.2 1.8 4.1 4.2 0 2.3-1.9 4.2-4.3 4.1-2.3 0-4.1-1.9-4.1-4.2.1-2.3 2-4.1 4.3-4.1z"/><path d="M9.6 12.6c.9 0 1.6.7 1.6 1.6 0 .9-.7 1.6-1.6 1.6-.9 0-1.6-.7-1.6-1.6 0-.9.7-1.6 1.6-1.6z"/><path d="M9.6 8.5v1.4M9.6 18.4v1.4M4 14.2h1.4M13.9 14.2h1.3M5.6 10.2l1 .9M12.6 17.3l1 1M5.6 18.2l1-.9M12.7 11.1l.9-.9"/><path class="g" d="M17.6 3.1c.3 1.7 1 2.5 2.7 2.8-1.7.3-2.4 1-2.7 2.7-.3-1.7-1.1-2.4-2.8-2.7 1.7-.3 2.5-1.1 2.8-2.8z"/></svg>
+                <svg class="x-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="b" d="M14.6 12.9C22.8 6.5 37.9 6.8 47.3 13.6c9.1 6.6 11.4 18.5 6.6 28.7-4.9 10.5-16.4 16-27.8 13.6C14.9 53.5 6.9 44.3 7.5 33c.4-8 1.8-15.1 7.1-20.1z"/><path d="M18.4 24.6c0-2.3 1.7-3.9 4-4 6.4-.2 12.8-.1 19.2.1 2.2.1 3.9 1.8 3.9 4l-.1 14.4c0 2.2-1.8 3.9-4 3.9H31.3l-6.6 5.3.4-5.4h-2.9c-2.2 0-3.9-1.7-3.9-3.9z"/><path d="M32 20.6c.1-2.1.1-4.1 0-6.1"/><path class="g f" d="M30.1 12.6c.6-1.3 2.4-1.5 3.5-.5.9.9.7 2.6-.5 3.2-1.3.7-3.1 0-3.2-1.4 0-.5.1-.9.2-1.3z"/><path class="g f" d="M24.9 29.6c.9-.7 2.4-.6 3 .4.6 1-.1 2.6-1.4 2.7-1.4.2-2.4-1.1-2-2.3.1-.3.2-.6.4-.8zM36.2 29.6c.9-.7 2.4-.6 3 .4.6 1-.1 2.6-1.4 2.7-1.4.2-2.4-1.1-2-2.3.1-.3.2-.6.4-.8z"/><path d="M27.3 36.6c2.9 1.8 6.5 1.8 9.4-.1"/><path d="M14.6 29.1c-1.6.1-2.6 1.2-2.6 2.8.1 1.6 1.1 2.7 2.7 2.7M49.5 29c1.6.1 2.6 1.2 2.6 2.8 0 1.6-1.1 2.7-2.6 2.7"/><path class="g" d="M50.1 8.9c.4 2.1 1.3 3.1 3.4 3.5-2.1.4-3 1.3-3.4 3.4-.4-2.1-1.4-3-3.5-3.4 2.1-.4 3.1-1.4 3.5-3.5z"/></svg>
                 <div><h3><b>AI tools and automation</b></h3><span>AI tools and automated workflows that take over repetitive work.</span></div>
               </li>
           </ul>
