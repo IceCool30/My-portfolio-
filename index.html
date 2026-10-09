@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bukie Digital Solutions</title>
     <meta name="description" content="Websites, mobile apps and AI tools built for real users. Based in Abuja, Nigeria." />
+    <meta name="theme-color" content="#1B2A5E" />
+    <meta property="og:title" content="Bukie Digital Solutions" />
+    <meta property="og:description" content="Websites, mobile apps and AI tools built for real users. Based in Abuja, Nigeria." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://icecool30.github.io/My-portfolio-/" />
+    <meta property="og:image" content="https://icecool30.github.io/My-portfolio-/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Bukie Digital Solutions" />
+    <meta name="twitter:description" content="Websites, mobile apps and AI tools built for real users. Based in Abuja, Nigeria." />
+    <meta name="twitter:image" content="https://icecool30.github.io/My-portfolio-/og-image.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -190,18 +202,16 @@
         .hero > .callout { background-color: hsl(225 55% 16% / .92); }
       }
 
-      /* Hero: typing line and the two buttons */
-      .x-type { font: var(--type-lede); color: var(--hero-text); min-height: 1.5em; }
-      .x-type__word { color: #9fdcbb; }
-      .x-type__cursor { display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -0.15em; background: #9fdcbb; animation: x-blink 1s steps(1) infinite; }
-      .x-type__static { display: none; }
-      @keyframes x-blink { 50% { opacity: 0; } }
-      @media (prefers-reduced-motion: reduce) {
-        .x-type__live { display: none; }
-        .x-type__static { display: inline; }
-      }
+      /* Hero: the two buttons. On phones they share a row when they fit, else each fills the width */
       .hero .links { margin-top: 6px; }
       @media (pointer: coarse), (max-width: 599px) { .hero .links .btn { min-height: 48px; } .links .btn { min-height: var(--tap); } }
+      @media (max-width: 599px) { .hero .links .btn { flex: 1 1 auto; justify-content: center; } }
+
+      /* No hairline directly under the hero card, or right after a tinted card */
+      .hero + .section, .x-tint + .section { border-top: 0; }
+
+      /* No sideways scroll on narrow screens */
+      body { overflow-x: clip; }
 
       /* Type: confident headings, comfortable measure */
       .head h2 { font: var(--weight-medium) clamp(26px, 3.1vw, 38px)/1.18 var(--sans); letter-spacing: -0.015em; max-width: 24ch; text-wrap: balance; }
@@ -228,15 +238,23 @@
       .x-id__name { font: var(--weight-medium) clamp(22px, 2.4vw, 28px)/1.2 var(--sans); letter-spacing: -0.01em; color: var(--x-navy-ink); }
       .x-id__role { font: var(--type-label); color: var(--x-green-ink); margin-top: 6px; }
       .x-id__sub { font: var(--type-small); color: var(--text-secondary); margin-top: 4px; }
-      @media (max-width: 599px) { .x-id__avatar { width: 88px; height: 88px; } }
-      @media (max-width: 359px) { .x-id { flex-direction: column; align-items: flex-start; gap: 12px; } .x-id__avatar { align-self: flex-start; } }
+      .x-id__role, .x-id__sub { text-wrap: pretty; }
+      @media (max-width: 599px) {
+        .x-id { align-items: flex-start; gap: 16px; }
+        .x-id__avatar { align-self: flex-start; width: 72px; height: 72px; }
+      }
       /* Phones: logo left, scrollable links in the middle, compact CTA and theme toggle right */
       @media (max-width: 760px) {
         header.nav.x-topbar { width: 100%; justify-self: stretch; gap: 4px; }
         header.nav.x-topbar .seg { flex: 1 1 auto; --x-pill-h: var(--tap); }
         .x-topbar .theme-btn { width: var(--tap); height: var(--tap); }
+        /* Link strip: a soft right-edge fade over the clipped next link, and a small gap before the CTA */
+        header.nav.x-topbar .seg { --x-fr: 40px; margin-right: 6px; }
+        header.nav.x-topbar .seg.x-has-ind:not(.x-fr) { --x-fr: 0px; }
+        header.nav.x-topbar .seg.x-fl { --x-fl: 28px; }
       }
-      @media (max-width: 480px) { .x-cta-more { display: none; } }
+      .x-cta-short { display: none; }
+      @media (max-width: 419px) { .x-cta-long { display: none; } .x-cta-short { display: inline; } }
 
       /* Skills: grouped lines, thin rules */
       .x-skills { margin: clamp(20px, 2.6vw, 28px) 0 0; }
@@ -249,7 +267,16 @@
 
       /* Closing call to action */
       .x-cta .links { margin-top: 20px; }
-      .x-cta .head__sub { color: var(--text-primary); }
+      /* Phones: equal widths, on one row when both fit, else each the full width of the card */
+      @media (max-width: 599px) { .x-cta .links .btn { flex: 1 1 0; min-width: max-content; justify-content: center; } }
+      .x-cta .head { grid-template-columns: minmax(0, 1fr); }
+      .x-cta .head__sub { color: var(--text-primary); justify-self: start; text-align: left; }
+      /* Green card buttons: solid navy primary, clear white outlined WhatsApp, a light bevel only */
+      .x-cta .btn.x-glass { text-shadow: none; }
+      .x-cta .x-btn--primary { --x-fill: #1B2A5E; --x-ink: #fff; --x-bevel: var(--bevel-sm); border-color: #1B2A5E; }
+      .x-cta .x-btn--wa { --x-fill: light-dark(#fff, hsl(0 0% 100% / .06)); --x-ink: light-dark(#14502f, #fff); --x-bevel: var(--bevel-sm); border-color: light-dark(hsl(150 55% 27% / .55), hsl(0 0% 100% / .6)); }
+      .x-cta .x-btn--primary:hover::before { background-image: linear-gradient(hsl(0 0% 100% / .1), hsl(0 0% 100% / .1)), var(--x-noise); }
+      .x-cta .x-btn--wa:hover::before { background-image: linear-gradient(light-dark(hsl(150 55% 27% / .06), hsl(0 0% 100% / .08)), light-dark(hsl(150 55% 27% / .06), hsl(0 0% 100% / .08))), var(--x-noise); }
       .x-nav-cta {
         flex: none;
         display: inline-flex;
@@ -306,13 +333,16 @@
       }
       .x-flow__num { font: var(--type-numeral); font-variant-numeric: tabular-nums; margin-bottom: 12px; color: var(--x-navy-ink); }
       .x-flow h3 { font: var(--type-heading); text-wrap: balance; }
+      /* Phones: dot and line on the left, then the number and the text side by side */
       @media (max-width: 760px) {
         .x-flow { grid-template-columns: minmax(0, 1fr); }
-        .x-flow__step { padding: 0 0 28px 32px; }
+        .x-flow__step { display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 12px; align-items: baseline; padding: 0 0 28px 30px; }
         .x-flow__step:last-child { padding-bottom: 0; }
-        .x-flow__step::before, .x-flow__step::after { top: 20px; bottom: 4px; left: 5px; right: auto; width: 1px; height: auto; }
+        .x-flow__node { top: 10.5px; }
+        .x-flow__step::before, .x-flow__step::after { top: 16px; bottom: -16px; left: 5px; right: auto; width: 1px; height: auto; }
         .x-flow__step::after { transform-origin: center top; }
-        .x-flow__num { font-size: 40px; line-height: 1; margin-bottom: 8px; }
+        .x-flow__num { font-size: 32px; line-height: 32px; height: 32px; margin: 0; white-space: nowrap; overflow: visible; }
+        .x-flow h3 { text-wrap: pretty; max-width: none; }
       }
 
       /* Calm rhythm: the one-line section sits tight */
@@ -338,7 +368,14 @@
       .x-contact__num { font: var(--type-body-strong); display: flex; align-items: center; min-height: var(--tap); }
       .x-contact .links { margin-top: 2px; gap: 8px; }
       .x-contact .btn.x-glass { padding: 0 16px; }
-      @media (max-width: 760px) { .x-contact { grid-template-columns: minmax(0, 1fr); } }
+      .x-contact a.link { margin: 0; min-width: 0; max-width: 100%; }
+      @media (max-width: 760px) { .x-contact { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+
+      /* Footer on phones: logo and copyright centred, no chip rows */
+      @media (max-width: 759px) {
+        .foot { justify-content: center; text-align: center; }
+        .foot nav { display: none; }
+      }
 
       @media (prefers-reduced-motion: no-preference) {
         html { scroll-behavior: smooth; }
@@ -383,10 +420,6 @@
             <h1>Bukie Digital Solutions</h1>
             <p class="hero__sub">Websites, mobile apps and AI tools built for real users.</p>
             <p class="hero__meta">Based in Abuja, Nigeria</p>
-            <p class="x-type" role="img" aria-label="We build websites that convert, mobile apps people enjoy, AI tools that save time, and systems that grow with you.">
-              <span aria-hidden="true" class="x-type__live">We build <span class="x-type__word" id="x-type-word">websites that convert.</span><span class="x-type__cursor"></span></span>
-              <span aria-hidden="true" class="x-type__static">We build websites, mobile apps, AI tools and systems that grow with you.</span>
-            </p>
             <div class="links">
               <a class="btn x-glass x-btn--primary" href="mailto:bukiedigitalsolutions@gmail.com?subject=New%20project%20enquiry&body=Hello%20Solomon%2C%0A%0AMy%20name%20is%3A%20%0ACompany%3A%20%0AWhat%20I%20need%20built%3A%20%0ABudget%20range%3A%20%0AWhen%20I%20need%20it%3A%20%0A%0AThank%20you."><span>Start a project</span></a>
               <a class="btn x-glass x-btn--wa" href="https://wa.me/2347064844203" target="_blank" rel="noopener"><span>Chat on WhatsApp</span><span class="x-ext" aria-hidden="true">↗</span></a>
@@ -553,7 +586,12 @@
             <h2>Talk to Solomon directly.</h2>
           </div>
           <ul class="x-contact" data-step="60">
-            <li><small>Email</small><a class="link" href="mailto:bukiedigitalsolutions@gmail.com?subject=New%20project%20enquiry&body=Hello%20Solomon%2C%0A%0AMy%20name%20is%3A%20%0ACompany%3A%20%0AWhat%20I%20need%20built%3A%20%0ABudget%20range%3A%20%0AWhen%20I%20need%20it%3A%20%0A%0AThank%20you.">bukiedigitalsolutions@gmail.com</a></li>
+            <li>
+              <small>Email</small><a class="link" href="mailto:bukiedigitalsolutions@gmail.com?subject=New%20project%20enquiry&body=Hello%20Solomon%2C%0A%0AMy%20name%20is%3A%20%0ACompany%3A%20%0AWhat%20I%20need%20built%3A%20%0ABudget%20range%3A%20%0AWhen%20I%20need%20it%3A%20%0A%0AThank%20you.">bukiedigitalsolutions@gmail.com</a>
+              <div class="links">
+                <a class="btn x-glass x-btn--soft" href="mailto:bukiedigitalsolutions@gmail.com?subject=New%20project%20enquiry&body=Hello%20Solomon%2C%0A%0AMy%20name%20is%3A%20%0ACompany%3A%20%0AWhat%20I%20need%20built%3A%20%0ABudget%20range%3A%20%0AWhen%20I%20need%20it%3A%20%0A%0AThank%20you."><span>Email</span></a>
+              </div>
+            </li>
             <li>
               <small>Phone and WhatsApp</small><span class="x-contact__num">+234 706 484 4203</span>
               <div class="links">
@@ -584,8 +622,7 @@
             var cta = doc.createElement("a");
             cta.className = "x-nav-cta x-glass x-btn--primary";
             cta.href = "mailto:bukiedigitalsolutions@gmail.com?subject=New%20project%20enquiry&body=Hello%20Solomon%2C%0A%0AMy%20name%20is%3A%20%0ACompany%3A%20%0AWhat%20I%20need%20built%3A%20%0ABudget%20range%3A%20%0AWhen%20I%20need%20it%3A%20%0A%0AThank%20you.";
-            cta.setAttribute("aria-label", "Start a project");
-            cta.innerHTML = '<span>Start<span class="x-cta-more"> a project</span></span>';
+            cta.innerHTML = '<span><span class="x-cta-long">Start a project</span><span class="x-cta-short">Contact us</span></span>';
             var theme = bar.querySelector(".theme-btn");
             bar.insertBefore(cta, theme);
           }
@@ -694,27 +731,6 @@
             edges();
           }
 
-          // Hero typing line
-          var word = doc.getElementById("x-type-word");
-          if (word && !reduce) {
-            var phrases = ["websites that convert.", "mobile apps people enjoy.", "AI tools that save time.", "systems that grow with you."];
-            var p = 0, n = phrases[0].length, deleting = true;
-            var tick = function () {
-              var wait;
-              if (deleting) {
-                n--;
-                wait = 38;
-                if (n <= 0) { n = 0; deleting = false; p = (p + 1) % phrases.length; wait = 420; }
-              } else {
-                n++;
-                wait = 70;
-                if (n >= phrases[p].length) { deleting = true; wait = 2000; }
-              }
-              word.textContent = phrases[p].slice(0, n);
-              setTimeout(tick, wait);
-            };
-            setTimeout(tick, 2400);
-          }
           // Top bar ink: white over the hero photo, navy (or white in dark mode) over everything else
           if (bar && hero) {
             var inkQueued = false;
