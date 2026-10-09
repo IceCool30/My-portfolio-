@@ -231,6 +231,25 @@
       .x-svc span { display: block; font: var(--type-small); color: var(--text-secondary); max-width: 46ch; }
       @media (max-width: 760px) { .x-svc { grid-template-columns: minmax(0, 1fr); } }
 
+      /* Services: three headline offers as larger tinted cards */
+      .x-svc--feat { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.8vw, 20px); }
+      .x-svc--feat li { flex-direction: column; gap: 16px; padding: clamp(20px, 2.4vw, 28px); border: 0; border-radius: var(--r-l); background: var(--x-navy-tint); }
+      .x-svc--feat .x-ico { width: 40px; height: 40px; }
+      .x-svc--feat h3 { margin: 0 0 6px; }
+      .x-svc--feat b { font: var(--type-heading); font-weight: var(--weight-bold); margin: 0; text-wrap: balance; }
+      .x-svc--feat span { font: var(--type-body); color: var(--text-secondary); max-width: 40ch; }
+      @media (max-width: 900px) { .x-svc--feat { grid-template-columns: minmax(0, 1fr); } .x-svc--feat li { flex-direction: row; gap: 16px; } .x-svc--feat .x-ico { width: 32px; height: 32px; } }
+
+      /* Services: the compact "Also available" list */
+      .x-group--more { margin-top: clamp(32px, 4vw, 48px); }
+      .x-svc--sm { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(20px, 3vw, 40px); }
+      .x-svc--sm li { gap: 12px; padding: 12px 0; }
+      .x-svc--sm .x-ico { width: 20px; height: 20px; margin-top: 1px; }
+      .x-svc--sm b { font: var(--type-small); font-weight: var(--weight-bold); margin-bottom: 2px; }
+      .x-svc--sm span { font: var(--type-caption); }
+      @media (max-width: 1000px) { .x-svc--sm { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 599px) { .x-svc--sm { grid-template-columns: minmax(0, 1fr); } }
+
       /* Founder: round avatar beside the name */
       .x-id { display: flex; flex-direction: row; align-items: center; gap: clamp(16px, 2.4vw, 24px); margin-bottom: clamp(20px, 2.6vw, 28px); }
       .x-id > div { min-width: 0; }
@@ -433,60 +452,51 @@
             <h2>Software, data and design for how your business works.</h2>
           </div>
 
-          <div class="x-group">
-            <h3 class="x-group__title">Build</h3>
-            <ul class="x-svc" data-step="50">
-              <li>
-                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 5.3c0-.9.6-1.5 1.5-1.4l13.9-.1c.9 0 1.5.6 1.4 1.5l.1 13.3c0 .9-.6 1.5-1.5 1.4H5c-.9.1-1.5-.5-1.4-1.4z"/><path d="M3.8 8.1c5.5.2 11 .1 16.5-.1"/><path d="M9.3 11.2l-2.2 2.4 2.3 2.2"/><path d="M14.7 11.1l2.2 2.5-2.3 2.3"/><path class="g" d="M12.8 10.8l-1.5 5.6"/></svg>
-                <div><b>Custom software</b><span>Applications and architecture shaped around how your business runs.</span></div>
-              </li>
+          <ul class="x-svc x-svc--feat" data-step="80">
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 9.1l1.5-4.8 14.3.1 1.4 4.7"/><path d="M3.4 9.1c0 1.3 1 2.2 2.2 2.2s2.1-.9 2.1-2.1c0 1.2 1 2.1 2.2 2.1s2.1-.9 2.1-2.1c.1 1.2 1 2.1 2.2 2.1s2.1-.9 2.1-2.1c0 1.2.9 2.2 2.1 2.2s2.1-.9 2.1-2.2"/><path d="M5.1 11.3l-.1 8.5c4.7.2 9.4.1 14.1 0l.1-8.6"/><path class="g" d="M10.1 19.8v-4.5c0-.6.4-.9.9-.9h2.2c.6 0 .9.4.9.9l.1 4.5"/></svg>
-                <div><b>Web and e-commerce</b><span>Fast, responsive websites and online stores.</span></div>
+                <div><h3><b>Websites and online stores</b></h3><span>Fast, responsive websites and e-commerce stores that work well on any phone.</span></div>
               </li>
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.3 3.9c0-.8.6-1.4 1.4-1.4l6.9.1c.8 0 1.3.5 1.3 1.3l.1 16.2c0 .8-.6 1.4-1.4 1.4H8.6c-.8 0-1.4-.5-1.3-1.3z"/><path d="M10.7 5.3c.9-.1 1.7 0 2.6 0"/><path class="g" d="M11.3 18.4c.2-.5.9-.6 1.3-.2.4.4.2 1.1-.4 1.2-.6.1-1-.4-.9-1z"/></svg>
-                <div><b>Mobile apps</b><span>iOS and Android, native or cross-platform with React Native and Flutter.</span></div>
+                <div><h3><b>Mobile apps</b></h3><span>iOS and Android apps, native or cross-platform with React Native and Flutter.</span></div>
+              </li>
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.7 10c2.3-.1 4.2 1.8 4.1 4.2 0 2.3-1.9 4.2-4.3 4.1-2.3 0-4.1-1.9-4.1-4.2.1-2.3 2-4.1 4.3-4.1z"/><path d="M9.6 12.6c.9 0 1.6.7 1.6 1.6 0 .9-.7 1.6-1.6 1.6-.9 0-1.6-.7-1.6-1.6 0-.9.7-1.6 1.6-1.6z"/><path d="M9.6 8.5v1.4M9.6 18.4v1.4M4 14.2h1.4M13.9 14.2h1.3M5.6 10.2l1 .9M12.6 17.3l1 1M5.6 18.2l1-.9M12.7 11.1l.9-.9"/><path class="g" d="M17.6 3.1c.3 1.7 1 2.5 2.7 2.8-1.7.3-2.4 1-2.7 2.7-.3-1.7-1.1-2.4-2.8-2.7 1.7-.3 2.5-1.1 2.8-2.8z"/></svg>
+                <div><h3><b>AI tools and automation</b></h3><span>AI tools and automated workflows that take over repetitive work.</span></div>
+              </li>
+          </ul>
+
+          <div class="x-group x-group--more">
+            <h3 class="x-group__title">Also available</h3>
+            <ul class="x-svc x-svc--sm" data-step="40">
+              <li>
+                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 5.3c0-.9.6-1.5 1.5-1.4l13.9-.1c.9 0 1.5.6 1.4 1.5l.1 13.3c0 .9-.6 1.5-1.5 1.4H5c-.9.1-1.5-.5-1.4-1.4z"/><path d="M3.8 8.1c5.5.2 11 .1 16.5-.1"/><path d="M9.3 11.2l-2.2 2.4 2.3 2.2"/><path d="M14.7 11.1l2.2 2.5-2.3 2.3"/><path class="g" d="M12.8 10.8l-1.5 5.6"/></svg>
+                <div><b>Custom software</b><span>Applications shaped around how your business runs.</span></div>
               </li>
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.7 5.7c0-.9.5-1.6 1.4-1.6l9.4.1"/><path d="M3.7 5.7l.1 12.9c0 .9.6 1.4 1.5 1.4l13.2-.1c.9 0 1.5-.5 1.4-1.4l.1-5.2"/><path d="M11.1 13.3l1.2-4.1 5.9-5.1 2.5 2.5-5.1 5.9z"/><path class="g" d="M11.3 13.1l2.8-2.7"/></svg>
                 <div><b>UI/UX design</b><span>Clear, accessible interfaces and design systems.</span></div>
               </li>
-            </ul>
-          </div>
-
-          <div class="x-group">
-            <h3 class="x-group__title">Data and AI</h3>
-            <ul class="x-svc" data-step="50">
-              <li>
-                <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.7 10c2.3-.1 4.2 1.8 4.1 4.2 0 2.3-1.9 4.2-4.3 4.1-2.3 0-4.1-1.9-4.1-4.2.1-2.3 2-4.1 4.3-4.1z"/><path d="M9.6 12.6c.9 0 1.6.7 1.6 1.6 0 .9-.7 1.6-1.6 1.6-.9 0-1.6-.7-1.6-1.6 0-.9.7-1.6 1.6-1.6z"/><path d="M9.6 8.5v1.4M9.6 18.4v1.4M4 14.2h1.4M13.9 14.2h1.3M5.6 10.2l1 .9M12.6 17.3l1 1M5.6 18.2l1-.9M12.7 11.1l.9-.9"/><path class="g" d="M17.6 3.1c.3 1.7 1 2.5 2.7 2.8-1.7.3-2.4 1-2.7 2.7-.3-1.7-1.1-2.4-2.8-2.7 1.7-.3 2.5-1.1 2.8-2.8z"/></svg>
-                <div><b>AI and automation</b><span>AI tools and automated workflows that take over repetitive work.</span></div>
-              </li>
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.8 3.9l.1 15.8c0 .3.2.5.5.5l15.8-.1"/><path d="M8.1 17.1v-3.9M12.1 17.2l-.1-5.6M16.1 17.1V10"/><path class="g" d="M7.4 10.2l3.6-3.3 3.1 2 4.8-4.5M16.5 4.3l2.5-.1-.1 2.5"/></svg>
-                <div><b>Data analytics and BI</b><span>Dashboards, reports and predictive models.</span></div>
+                <div><b>Data analytics and dashboards</b><span>Dashboards, reports and predictive models.</span></div>
               </li>
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6.2c0-1.3 3.1-2.3 7-2.3s7.1 1 7 2.3c0 1.3-3.1 2.4-7 2.4S5 7.5 5 6.2z"/><path d="M5 6.2l.1 11.5c0 1.3 3 2.4 6.9 2.4 3.9 0 7-1.1 7-2.4l.1-11.5"/><path d="M5.1 11.9c0 1.3 3 2.4 6.9 2.4 3.9 0 7-1 7-2.3"/><path class="g" d="M15.3 17.2l1.5-.2"/></svg>
-                <div><b>Databases</b><span>Design and performance tuning for MySQL, PostgreSQL, MongoDB and Redis.</span></div>
+                <div><b>Databases</b><span>Design and tuning for MySQL, PostgreSQL, MongoDB and Redis.</span></div>
               </li>
-            </ul>
-          </div>
-
-          <div class="x-group">
-            <h3 class="x-group__title">Run and support</h3>
-            <ul class="x-svc" data-step="50">
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.4 17.6c-2.2.1-3.9-1.5-3.9-3.5 0-1.9 1.5-3.4 3.4-3.5.5-2.8 2.9-4.8 5.7-4.7 2.6 0 4.6 1.7 5.3 4.1 2 .2 3.6 1.8 3.6 3.8 0 2.1-1.6 3.8-3.8 3.8"/><path class="g" d="M12 20.6l.1-7.2M9.4 15.9l2.7-2.6 2.5 2.7"/></svg>
-                <div><b>Cloud and DevOps</b><span>Cloud migration, Docker, Kubernetes and CI/CD on AWS, Google Cloud and Azure.</span></div>
+                <div><b>Cloud and DevOps</b><span>Docker, Kubernetes and CI/CD on AWS, Google Cloud and Azure.</span></div>
               </li>
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 10.2l8.3-.1-.1 3.3c0 2.2-1.8 3.9-4 3.9-2.3 0-4.1-1.8-4.1-4z"/><path d="M10.1 10.1V5.8M14.1 10.1l-.1-4.4"/><path class="g" d="M12.1 17.3l-.1 1.6c0 1.3.9 2.2 2.2 2.2h1.7"/></svg>
-                <div><b>APIs and integrations</b><span>REST and GraphQL APIs, payment and third-party integrations.</span></div>
+                <div><b>APIs and integrations</b><span>REST and GraphQL APIs, payments and third-party tools.</span></div>
               </li>
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.1c2.4 1.5 4.6 2.1 7.3 2.2.2 6.7-1.9 11.6-7.3 15.6-5.4-4-7.5-9-7.3-15.6 2.7-.1 4.9-.7 7.3-2.2z"/><path class="g" d="M8.9 12.1l2.2 2.2 4-4.4"/></svg>
-                <div><b>Security and QA</b><span>Secure authentication, encryption, vulnerability checks and automated testing.</span></div>
+                <div><b>Security and QA</b><span>Secure sign-in, encryption and automated testing.</span></div>
               </li>
               <li>
                 <svg class="x-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.4 4.1c3.5 0 6.2 2.8 6.1 6.3 0 3.4-2.8 6.1-6.3 6.1-3.4-.1-6.1-2.9-6.1-6.3.1-3.4 2.9-6.2 6.3-6.1z"/><path d="M14.9 15l5.4 5.3"/><path class="g" d="M8.7 8.6l-1.7 1.8 1.7 1.7M12.1 8.6l1.7 1.8-1.8 1.7"/></svg>
@@ -583,7 +593,7 @@
         <section class="section" id="contact" data-nav="Contact">
           <div class="head">
             <p class="head__eyebrow">Contact</p>
-            <h2>Talk to Solomon directly.</h2>
+            <h2>Talk to the founder directly.</h2>
           </div>
           <ul class="x-contact" data-step="60">
             <li>
