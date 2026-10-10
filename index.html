@@ -1,7 +1,11 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
+    <script>
+      /* Every first visit opens in light mode; after that, keep the theme the visitor chose */
+      try { var t = localStorage.getItem("site-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bukie Digital Solutions</title>
     <meta name="description" content="Websites, mobile apps and AI tools built for real users. Based in Abuja, Nigeria." />
